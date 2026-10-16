@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Nasif &amp; Esmat — You're invited</title>
+  <meta name="description" content="Tap to open your wedding invitation. Saturday, 5 December 2026." />
+  <meta name="theme-color" content="#EFE5D3" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nasif &amp; Esmat — You're invited" />
+  <meta property="og:description" content="Tap to open your wedding invitation." />
+  <meta property="og:image" content="https://nasifsarwar.github.io/Essif-Evite/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23EFE5D3' stroke='%23B08D57' stroke-width='3'/%3E%3Ctext x='32' y='41' font-family='Georgia' font-size='24' text-anchor='middle' fill='%238A6A3A'%3EN%26amp;E%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Amiri+Quran&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Galada&family=Great+Vibes&family=Tiro+Bangla&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="is-sealed">
+
+<!-- ============ Shared drawings (reused everywhere) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8A6A3A" />
+      <stop offset=".35" stop-color="#C9A462" />
+      <stop offset=".55" stop-color="#F1DDAE" />
+      <stop offset=".75" stop-color="#B08D57" />
+      <stop offset="1" stop-color="#8A6A3A" />
+    </linearGradient>
+    <radialGradient id="petalGrad" cx=".5" cy=".75" r=".8">
+      <stop offset="0" stop-color="#FFFDF8" />
+      <stop offset=".6" stop-color="#F6EEE0" />
+      <stop offset="1" stop-color="#E6D6BC" />
+    </radialGradient>
+    <radialGradient id="goldDot" cx=".4" cy=".35" r=".7">
+      <stop offset="0" stop-color="#F6E3B4" />
+      <stop offset=".6" stop-color="#C9A462" />
+      <stop offset="1" stop-color="#8A6A3A" />
+    </radialGradient>
+    <radialGradient id="glassGlow" cx=".5" cy=".55" r=".6">
+      <stop offset="0" stop-color="#FFF6D8" />
+      <stop offset=".5" stop-color="#F6CF7A" />
+      <stop offset="1" stop-color="#C98F35" />
+    </radialGradient>
+    <linearGradient id="marble" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" />
+      <stop offset=".7" stop-color="#F2EADC" />
+      <stop offset="1" stop-color="#E2D4BC" />
+    </linearGradient>
+    <linearGradient id="marbleSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFF7E6" stop-opacity=".0" />
+      <stop offset=".6" stop-color="#E9D7B8" stop-opacity=".0" />
+      <stop offset="1" stop-color="#D9C3A0" stop-opacity=".55" />
+    </linearGradient>
+
+    <!-- arch window shape, 0–1 box so it scales to any element -->
+    <clipPath id="archClip" clipPathUnits="objectBoundingBox">
+      <path transform="scale(.01 .00625)" d="M0 160 V64 C0 40 18 26 32 18 C42 12 48 6 50 0 C52 6 58 12 68 18 C82 26 100 40 100 64 V160 Z" />
+    </clipPath>
+    <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+      <path d="M.5 .97 C.2 .76 .02 .58 .02 .33 C.02 .15 .15 .03 .3 .03 C.4 .03 .46 .09 .5 .17 C.54 .09 .6 .03 .7 .03 C.85 .03 .98 .15 .98 .33 C.98 .58 .8 .76 .5 .97 Z" />
+    </clipPath>
+
+    <!-- petal shapes -->
+    <path id="petOuter" d="M0 -3 C-17 -12 -19 -38 0 -47 C19 -38 17 -12 0 -3 Z" />
+    <path id="petSmall" d="M0 0 C-6 -4 -7 -13 0 -16 C7 -13 6 -4 0 0 Z" />
+
+    <!-- big ivory peony -->
+    <symbol id="peony" viewBox="-50 -50 100 100" overflow="visible">
+      <g fill="url(#petalGrad)" stroke="#D3BF9C" stroke-width=".8">
+        <use href="#petOuter" /><use href="#petOuter" transform="rotate(45)" />
+        <use href="#petOuter" transform="rotate(90)" /><use href="#petOuter" transform="rotate(135)" />
+        <use href="#petOuter" transform="rotate(180)" /><use href="#petOuter" transform="rotate(225)" />
+        <use href="#petOuter" transform="rotate(270)" /><use href="#petOuter" transform="rotate(315)" />
+        <g transform="rotate(22) scale(.68)">
+          <use href="#petOuter" /><use href="#petOuter" transform="rotate(60)" /><use href="#petOuter" transform="rotate(120)" />
+          <use href="#petOuter" transform="rotate(180)" /><use href="#petOuter" transform="rotate(240)" /><use href="#petOuter" transform="rotate(300)" />
+        </g>
+        <g transform="rotate(8) scale(.42)">
+          <use href="#petOuter" /><use href="#petOuter" transform="rotate(72)" /><use href="#petOuter" transform="rotate(144)" />
+          <use href="#petOuter" transform="rotate(216)" /><use href="#petOuter" transform="rotate(288)" />
+        </g>
+      </g>
+      <circle r="7.5" fill="url(#goldDot)" />
+      <g fill="#B08D57">
+        <circle cx="0" cy="-10.5" r="1.3" /><circle cx="7.4" cy="-7.4" r="1.3" /><circle cx="10.5" cy="0" r="1.3" />
+        <circle cx="7.4" cy="7.4" r="1.3" /><circle cx="0" cy="10.5" r="1.3" /><circle cx="-7.4" cy="7.4" r="1.3" />
+        <circle cx="-10.5" cy="0" r="1.3" /><circle cx="-7.4" cy="-7.4" r="1.3" />
+      </g>
+    </symbol>
+
+    <!-- small five-petal blossom -->
+    <symbol id="blossom" viewBox="-20 -20 40 40" overflow="visible">
+      <g fill="#FBF6EC" stroke="#D3BF9C" stroke-width=".7">
+        <use href="#petSmall" /><use href="#petSmall" transform="rotate(72)" /><use href="#petSmall" transform="rotate(144)" />
+        <use href="#petSmall" transform="rotate(216)" /><use href="#petSmall" transform="rotate(288)" />
+      </g>
+      <circle r="3" fill="url(#goldDot)" />
+    </symbol>
+
+    <symbol id="blossomGold" viewBox="-20 -20 40 40" overflow="visible">
+      <g fill="url(#gold)" stroke="#9C7A45" stroke-width=".5">
+        <use href="#petSmall" /><use href="#petSmall" transform="rotate(72)" /><use href="#petSmall" transform="rotate(144)" />
+        <use href="#petSmall" transform="rotate(216)" /><use href="#petSmall" transform="rotate(288)" />
+      </g>
+      <circle r="3" fill="#F6E3B4" />
+    </symbol>
+    <radialGradient id="waxGrad" cx=".4" cy=".35" r=".75">
+      <stop offset="0" stop-color="#FFFEFA" />
+      <stop offset=".55" stop-color="#F2E9D9" />
+      <stop offset="1" stop-color="#D6C4A2" />
+    </radialGradient>
+
+    <symbol id="leaf" viewBox="0 -10 40 20" overflow="visible">
+      <path d="M0 0 C8 -9 26 -10 40 0 C26 10 8 9 0 0 Z" fill="#D9C7A2" stroke="#B9A076" stroke-width=".7" />
+      <path d="M2 0 H36" stroke="#B9A076" stroke-width=".6" fill="none" />
+    </symbol>
+
+    <!-- a floral cluster used in corners -->
+    <symbol id="cluster" viewBox="-120 -120 240 240" overflow="visible">
+      <path d="M-100 90 C-60 40 -20 10 40 -10 C70 -20 95 -40 110 -70" fill="none" stroke="#C2A87C" stroke-width="1.4" />
+      <path d="M-60 -90 C-40 -50 -10 -20 20 0" fill="none" stroke="#C2A87C" stroke-width="1.2" />
+      <use href="#leaf" x="0" y="-10" width="40" height="20" transform="translate(-30 30) rotate(-150) scale(1.6)" />
+      <use href="#leaf" x="0" y="-10" width="40" height="20" transform="translate(30 10) rotate(-20) scale(1.5)" />
+      <use href="#leaf" x="0" y="-10" width="40" height="20" transform="translate(-10 -30) rotate(-105) scale(1.4)" />
+      <use href="#leaf" x="0" y="-10" width="40" height="20" transform="translate(60 -25) rotate(-45) scale(1.2)" />
+      <use href="#leaf" x="0" y="-10" width="40" height="20" transform="translate(-70 60) rotate(160) scale(1.2)" />
+      <use href="#leaf" x="0" y="-10" width="40" height="20" transform="translate(90 -55) rotate(-60) scale(1)" />
+      <use href="#peony" x="-50" y="-50" width="100" height="100" transform="translate(-6 6) scale(1.15)" />
+      <use href="#peony" x="-50" y="-50" width="100" height="100" transform="translate(-72 64) rotate(30) scale(.7)" />
+      <use href="#peony" x="-50" y="-50" width="100" height="100" transform="translate(62 -40) rotate(-20) scale(.6)" />
+      <use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(-48 -58) scale(1.2)" />
+      <use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(100 -78)" />
+      <use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(-95 20) scale(.9)" />
+      <use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(40 30) scale(.8)" />
+      <g fill="#C9A462"><circle cx="-62" cy="-92" r="2.4" /><circle cx="112" cy="-72" r="2" /><circle cx="-104" cy="92" r="2.2" /></g>
+    </symbol>
+
+    <!-- embossed vine for the envelope (drawn in paper colour; the shadow makes it raised) -->
+    <symbol id="vine" viewBox="0 0 60 400" overflow="visible">
+      <path d="M30 400 C20 330 42 280 28 220 C16 160 40 110 30 40 C28 25 30 10 32 0" fill="none" stroke="#EFE6D6" stroke-width="2.4" />
+      <g fill="#F1E9DA">
+        <path d="M28 340 C14 332 6 318 4 306 C18 310 28 322 28 340 Z" /><path d="M32 300 C46 292 54 278 56 266 C42 270 32 282 32 300 Z" />
+        <path d="M27 250 C13 242 5 228 3 216 C17 220 27 232 27 250 Z" /><path d="M31 190 C45 182 53 168 55 156 C41 160 31 172 31 190 Z" />
+        <path d="M29 140 C15 132 7 118 5 106 C19 110 29 122 29 140 Z" /><path d="M31 90 C45 82 53 68 55 56 C41 60 31 72 31 90 Z" />
+      </g>
+      <g transform="translate(46 228)"><use href="#blossomEmboss" /></g>
+      <g transform="translate(12 175)"><use href="#blossomEmboss" /></g>
+      <g transform="translate(46 112) scale(.8)"><use href="#blossomEmboss" /></g>
+      <g transform="translate(14 60) scale(.9)"><use href="#blossomEmboss" /></g>
+      <g transform="translate(32 6) scale(.7)"><use href="#blossomEmboss" /></g>
+    </symbol>
+    <g id="blossomEmboss" fill="#F3EBDD">
+      <use href="#petSmall" /><use href="#petSmall" transform="rotate(72)" /><use href="#petSmall" transform="rotate(144)" />
+      <use href="#petSmall" transform="rotate(216)" /><use href="#petSmall" transform="rotate(288)" />
+      <circle r="3" fill="#E8DCC6" />
+    </g>
+
+    <!-- white mosque at the horizon -->
+    <symbol id="mosque" viewBox="0 0 400 170" overflow="visible">
+      <g fill="url(#marble)">
+        <rect x="30" y="152" width="340" height="18" />
+        <rect x="64" y="122" width="78" height="32" /><rect x="258" y="122" width="78" height="32" />
+        <rect x="104" y="100" width="192" height="54" />
+        <rect x="160" y="78" width="80" height="24" />
+        <path d="M148 80 C148 40 182 24 200 6 C218 24 252 40 252 80 Z" />
+        <path d="M112 102 C112 84 124 76 134 68 C144 76 156 84 156 102 Z" />
+        <path d="M244 102 C244 84 256 76 266 68 C276 76 288 84 288 102 Z" />
+        <path d="M78 124 C78 112 86 106 92 100 C98 106 106 112 106 124 Z" />
+        <path d="M294 124 C294 112 302 106 308 100 C314 106 322 112 322 124 Z" />
+        <!-- outer minarets -->
+        <rect x="40" y="44" width="10" height="110" /><rect x="350" y="44" width="10" height="110" />
+        <rect x="36" y="74" width="18" height="5" /><rect x="346" y="74" width="18" height="5" />
+        <rect x="36" y="108" width="18" height="5" /><rect x="346" y="108" width="18" height="5" />
+        <path d="M38 46 C38 36 45 30 45 18 C45 30 52 36 52 46 Z" /><path d="M348 46 C348 36 355 30 355 18 C355 30 362 36 362 46 Z" />
+        <!-- inner minarets -->
+        <rect x="96" y="66" width="8" height="40" /><rect x="296" y="66" width="8" height="40" />
+        <rect x="93" y="80" width="14" height="4" /><rect x="293" y="80" width="14" height="4" />
+        <path d="M94 68 C94 60 100 56 100 46 C100 56 106 60 106 68 Z" /><path d="M294 68 C294 60 300 56 300 46 C300 56 306 60 306 68 Z" />
+      </g>
+      <g fill="url(#marbleSide)">
+        <path d="M148 80 C148 40 182 24 200 6 C218 24 252 40 252 80 Z" />
+        <path d="M112 102 C112 84 124 76 134 68 C144 76 156 84 156 102 Z" />
+        <path d="M244 102 C244 84 256 76 266 68 C276 76 288 84 288 102 Z" />
+      </g>
+      <g fill="#DCCAAB">
+        <path d="M188 154 V128 C188 120 194 114 200 112 C206 114 212 120 212 128 V154 Z" fill="#C9A462" opacity=".55" />
+        <path d="M128 150 V132 C128 127 132 124 135 123 C138 124 142 127 142 132 V150 Z" /><path d="M150 150 V132 C150 127 154 124 157 123 C160 124 164 127 164 132 V150 Z" />
+        <path d="M236 150 V132 C236 127 240 124 243 123 C246 124 250 127 250 132 V150 Z" /><path d="M258 150 V132 C258 127 262 124 265 123 C268 124 272 127 272 132 V150 Z" />
+        <path d="M80 150 V138 C80 134 83 132 86 131 C89 132 92 134 92 138 V150 Z" /><path d="M308 150 V138 C308 134 311 132 314 131 C317 132 320 134 320 138 V150 Z" />
+        <rect x="170" y="86" width="6" height="12" rx="3" /><rect x="186" y="86" width="6" height="12" rx="3" /><rect x="208" y="86" width="6" height="12" rx="3" /><rect x="224" y="86" width="6" height="12" rx="3" />
+      </g>
+      <g stroke="#C9A462" stroke-width="1.4" fill="none">
+        <path d="M200 6 V-8" /><path d="M134 68 V58" /><path d="M266 68 V58" /><path d="M45 18 V8" /><path d="M355 18 V8" />
+      </g>
+      <g fill="#C9A462"><circle cx="200" cy="-9" r="2.2" /><circle cx="134" cy="57" r="1.6" /><circle cx="266" cy="57" r="1.6" /></g>
+    </symbol>
+
+    <!-- hanging lantern -->
+    <symbol id="lantern" viewBox="0 0 40 130" overflow="visible">
+      <path d="M20 0 V44" stroke="#B08D57" stroke-width="1.2" stroke-dasharray="2.5 2" />
+      <circle cx="20" cy="46" r="3" fill="none" stroke="#B08D57" stroke-width="1.4" />
+      <path d="M9 58 C9 50 31 50 31 58 Z" fill="url(#gold)" />
+      <path d="M20 49 V51" stroke="#B08D57" />
+      <path d="M7 58 H33 L37 76 L33 100 H7 L3 76 Z" fill="url(#glassGlow)" stroke="#9C7A45" stroke-width="1.4" />
+      <path d="M15 58 L13 76 L15 100 M25 58 L27 76 L25 100 M3 76 H37" stroke="#9C7A45" stroke-width=".9" fill="none" opacity=".75" />
+      <path d="M8 100 H32 L27 107 H13 Z" fill="url(#gold)" />
+      <path d="M17 107 H23 L20 116 Z" fill="#B08D57" /><circle cx="20" cy="119" r="1.8" fill="#C9A462" />
+    </symbol>
+
+    <!-- timeline icons (line drawings) -->
+    <symbol id="i-guests" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 42 V20 C10 12 16 7 24 4 C32 7 38 12 38 20 V42" /><path d="M16 42 V24 C16 19 20 15 24 13 C28 15 32 19 32 24 V42" /><circle cx="24" cy="25" r="1.4" /><path d="M6 42 H42" /></g></symbol>
+    <symbol id="i-rings" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="28" r="10" /><circle cx="30" cy="28" r="10" /><path d="M26 14 L30 9 L34 14 L30 17 Z" stroke-linejoin="round" /><path d="M27 9 L33 9" /></g></symbol>
+    <symbol id="i-dining" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 32 C8 22 15 15 24 15 C33 15 40 22 40 32 Z" /><path d="M5 36 H43" /><circle cx="24" cy="12" r="2" /><path d="M16 26 C17 22 20 20 23 19" /></g></symbol>
+    <symbol id="i-camera" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M6 16 H15 L18 11 H30 L33 16 H42 V38 H6 Z" /><circle cx="24" cy="26" r="7" /><circle cx="24" cy="26" r="3" /><path d="M36 21 H38" stroke-linecap="round" /></g></symbol>
+    <symbol id="i-farewell" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M30 8 C22 9 16 16 16 24 C16 32 22 39 30 40 C25 37 21 31 21 24 C21 17 25 11 30 8 Z" /><path d="M34 16 L35.5 19.5 L39 21 L35.5 22.5 L34 26 L32.5 22.5 L29 21 L32.5 19.5 Z" /></g></symbol>
+    <symbol id="i-hanger" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 17 C24 14 21 13 21 11 C21 9 22.5 8 24 8 C25.5 8 27 9 27 11" /><path d="M24 17 L5 32 C4 33 5 35 6 35 H42 C43 35 44 33 43 32 Z" /></g></symbol>
+    <symbol id="flourish" viewBox="0 0 160 20"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 10 H62" /><path d="M98 10 H158" /><path d="M80 3 L86 10 L80 17 L74 10 Z" fill="currentColor" fill-opacity=".25" /><path d="M62 10 C66 4 70 4 72 10 C70 16 66 16 62 10 Z" /><path d="M98 10 C94 4 90 4 88 10 C90 16 94 16 98 10 Z" /><circle cx="80" cy="10" r="1.3" fill="currentColor" /></g></symbol>
+  </defs>
+</svg>
+
+<!-- ============ Fixed controls ============ -->
+<button class="pill pill--lang" id="langBtn" type="button" aria-label="Change language">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9" /><path d="M3 12 H21 M12 3 C15 6 15 18 12 21 C9 18 9 6 12 3" /></g></svg>
+  <span id="langLabel">বাংলা</span>
+</button>
+<button class="round-btn" id="musicBtn" type="button" aria-label="Play music" aria-pressed="false" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10 V14 H8 L13 18 V6 L8 10 Z" /><path class="wave" d="M16.5 9 C17.7 10.5 17.7 13.5 16.5 15" /><path class="wave" d="M19 6.5 C21.5 9.5 21.5 14.5 19 17.5" /><path class="mute" d="M16 9 L21 15 M21 9 L16 15" /></g></svg>
+</button>
+<audio id="music" loop preload="none"></audio>
+
+<!-- ============ GATE (behind the envelope) ============ -->
+<div class="gate" id="gate" aria-hidden="true">
+  <div class="gate__light"></div>
+  <div class="gate__door gate__door--left"><div class="door-panel"></div><span class="door-ring"></span></div>
+  <div class="gate__door gate__door--right"><div class="door-panel"></div><span class="door-ring"></span></div>
+</div>
+
+<!-- ============ ENVELOPE ============ -->
+<div class="envelope" id="envelope">
+  <svg class="env-crease" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 100 L50 57 L100 100" vector-effect="non-scaling-stroke" />
+  </svg>
+
+  <svg class="env-vine env-vine--left" viewBox="0 0 60 400" aria-hidden="true"><use href="#vine" /></svg>
+  <svg class="env-vine env-vine--right" viewBox="0 0 60 400" aria-hidden="true"><use href="#vine" /></svg>
+
+  <svg class="env-bottom" viewBox="-120 -60 240 120" aria-hidden="true">
+    <use href="#vine" x="-30" y="-40" width="60" height="400" transform="rotate(-62) scale(.35)" />
+    <use href="#vine" x="-30" y="-40" width="60" height="400" transform="scale(-1 1) rotate(-62) scale(.35)" />
+    <use href="#blossomGold" x="-20" y="-20" width="40" height="40" transform="translate(0 -6) scale(1.6)" />
+    <use href="#blossomGold" x="-20" y="-20" width="40" height="40" transform="translate(-34 8) scale(1.1)" />
+  </svg>
+
+  <div class="env-flap-wrap">
+    <div class="env-flap" id="flap">
+      <svg class="flap-art" viewBox="-160 -110 320 220" aria-hidden="true">
+        <g class="emboss-g">
+          <use href="#vine" x="-30" y="0" width="60" height="400" transform="rotate(-118) scale(.42)" />
+          <use href="#vine" x="-30" y="0" width="60" height="400" transform="scale(-1 1) rotate(-118) scale(.42)" />
+          <g transform="translate(0 -28) scale(.95)">
+            <g fill="#F4ECDF"><use href="#petOuter" /><use href="#petOuter" transform="rotate(45)" /><use href="#petOuter" transform="rotate(90)" /><use href="#petOuter" transform="rotate(135)" /><use href="#petOuter" transform="rotate(180)" /><use href="#petOuter" transform="rotate(225)" /><use href="#petOuter" transform="rotate(270)" /><use href="#petOuter" transform="rotate(315)" />
+              <g transform="rotate(22) scale(.62)"><use href="#petOuter" /><use href="#petOuter" transform="rotate(60)" /><use href="#petOuter" transform="rotate(120)" /><use href="#petOuter" transform="rotate(180)" /><use href="#petOuter" transform="rotate(240)" /><use href="#petOuter" transform="rotate(300)" /></g>
+            </g>
+            <circle r="8" fill="#E9DDC7" />
+          </g>
+        </g>
+        <use href="#blossomGold" x="-20" y="-20" width="40" height="40" transform="translate(-74 -62) scale(1.25)" />
+        <use href="#blossomGold" x="-20" y="-20" width="40" height="40" transform="translate(72 -48) scale(.95)" />
+      </svg>
+    </div>
+  </div>
+
+  <div class="seal-wrap">
+    <span class="seal-glow" aria-hidden="true"></span>
+    <span class="seal-orbit" aria-hidden="true"></span>
+    <button class="seal" id="seal" type="button" aria-label="Open the invitation">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <path class="seal__wax" d="M60 4 C68 4 70 9 77 10 C85 11 89 7 95 12 C101 17 98 23 102 29 C106 35 113 37 114 45 C115 53 109 56 110 63 C111 71 116 76 113 84 C110 92 103 91 99 98 C95 104 96 111 88 114 C80 117 76 111 68 113 C61 115 57 120 49 117 C41 114 41 108 34 104 C27 100 20 102 15 95 C10 88 14 82 11 75 C8 68 2 64 4 56 C6 48 12 46 13 39 C14 31 9 25 14 19 C19 13 26 16 32 12 C39 8 41 4 49 4 C53 4 56 4 60 4 Z" />
+        <circle cx="60" cy="60" r="40" class="seal__ring" />
+        <circle cx="60" cy="60" r="35" class="seal__ring seal__ring--thin" />
+      </svg>
+      <span class="seal__mono" id="monogram">N&amp;E</span>
+    </button>
+  </div>
+
+  <div class="env-to">
+    <span class="env-to__for" data-t="forGuest">For</span>
+    <span class="env-to__name" id="guestName">our dear guest</span>
+  </div>
+  <p class="env-hint" data-t="tapToOpen">Tap the seal to open</p>
+
+  <button class="pill pill--skip" id="skipBtn" type="button" data-t="skip">Skip</button>
+</div>
+
+<!-- ============ PAGE ============ -->
+<main id="page" tabindex="-1">
+
+  <!-- Hero: the arch with the mosque -->
+  <section class="hero" aria-label="Invitation">
+    <svg class="corner corner--tl" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+    <svg class="corner corner--tr" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+
+    <div class="arch">
+      <div class="scene">
+        <div class="sky"></div>
+        <div class="sun"></div>
+        <div class="cloud cloud--1"></div><div class="cloud cloud--2"></div><div class="cloud cloud--3"></div>
+
+        <div class="birds" aria-hidden="true">
+          <svg class="bird b1" viewBox="0 0 24 10"><path d="M0 7 Q6 0 12 7 Q18 0 24 7" /></svg>
+          <svg class="bird b2" viewBox="0 0 24 10"><path d="M0 7 Q6 0 12 7 Q18 0 24 7" /></svg>
+          <svg class="bird b3" viewBox="0 0 24 10"><path d="M0 7 Q6 0 12 7 Q18 0 24 7" /></svg>
+          <svg class="bird b4" viewBox="0 0 24 10"><path d="M0 7 Q6 0 12 7 Q18 0 24 7" /></svg>
+          <svg class="bird b5" viewBox="0 0 24 10"><path d="M0 7 Q6 0 12 7 Q18 0 24 7" /></svg>
+        </div>
+
+        <svg class="mosque" viewBox="0 -12 400 182" aria-hidden="true"><use href="#mosque" x="0" y="0" width="400" height="170" /></svg>
+        <div class="water"></div>
+        <svg class="mosque mosque--reflect" viewBox="0 -12 400 182" aria-hidden="true"><use href="#mosque" x="0" y="0" width="400" height="170" /></svg>
+        <div class="shimmer"></div>
+
+        <div class="hero-text">
+          <p class="hero-invite" data-t="heroInvite">You are invited to the wedding of</p>
+          <h1 class="hero-names">
+            <span class="goldtext" data-t="groomShort">Nasif</span>
+            <span class="hero-and" data-t="and">&amp;</span>
+            <span class="goldtext" data-t="brideShort">Esmat</span>
+          </h1>
+        </div>
+
+        <a class="scroll-hint" href="#verse">
+          <span data-t="scroll">Scroll down</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9 L12 15 L18 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+        </a>
+      </div>
+
+      <svg class="arch-trim" viewBox="0 0 100 160" preserveAspectRatio="none" aria-hidden="true">
+        <path class="trim-wall" d="M0 160 V64 C0 40 18 26 32 18 C42 12 48 6 50 0 C52 6 58 12 68 18 C82 26 100 40 100 64 V160" vector-effect="non-scaling-stroke" />
+        <path class="trim-gold" d="M0 160 V64 C0 40 18 26 32 18 C42 12 48 6 50 0 C52 6 58 12 68 18 C82 26 100 40 100 64 V160" vector-effect="non-scaling-stroke" />
+        <path class="trim-inner" d="M3 160 V64.5 C3 42 20 29 33.5 21 C43 15 48 9.5 50 4 C52 9.5 57 15 66.5 21 C80 29 97 42 97 64.5 V160" vector-effect="non-scaling-stroke" />
+      </svg>
+
+      <svg class="lantern lantern--l" viewBox="0 0 40 130" aria-hidden="true"><use href="#lantern" /></svg>
+      <svg class="lantern lantern--r" viewBox="0 0 40 130" aria-hidden="true"><use href="#lantern" /></svg>
+
+      <svg class="arch-flowers arch-flowers--bl" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+      <svg class="arch-flowers arch-flowers--br" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+    </div>
+
+    <svg class="corner corner--bl" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+    <svg class="corner corner--br" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+  </section>
+
+  <div class="content">
+
+    <!-- Verses -->
+    <section class="verse" id="verse">
+      <div class="verse-pill">
+        <svg class="ornament ornament--top" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+        <p class="arabic" lang="ar" dir="rtl" id="ayahLong"></p>
+        <p class="verse-trans" data-t="ayahLongTrans"></p>
+        <p class="verse-ref" data-t="ayahLongRef"></p>
+        <svg class="ornament ornament--bottom" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+      </div>
+
+      <div class="verse-card">
+        <p class="arabic arabic--big" lang="ar" dir="rtl" id="ayahShort"></p>
+        <p class="verse-card__trans" data-t="ayahShortTrans"></p>
+        <p class="verse-ref" data-t="ayahShortRef"></p>
+        <svg class="rings" viewBox="0 0 160 90" aria-hidden="true">
+          <circle class="ring ring--1" cx="62" cy="52" r="30" pathLength="1" />
+          <circle class="ring ring--2" cx="98" cy="52" r="30" pathLength="1" />
+          <path class="ring-stone" d="M92 16 L98 8 L104 16 L98 21 Z" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- Formal invitation -->
+    <section class="invite">
+      <div class="invite-card">
+        <svg class="invite-cap" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 34 C0 20 18 14 32 9 C42 6 48 3 50 0 C52 3 58 6 68 9 C82 14 100 20 100 34" vector-effect="non-scaling-stroke" />
+        </svg>
+        <div class="invite-body">
+          <p class="bismillah goldtext" lang="ar" dir="rtl">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+          <p class="caps" data-t="cardIntro"></p>
+          <p class="script-name goldtext" data-t="groomFull"></p>
+          <p class="parents" data-t="groomParents"></p>
+          <p class="script-with" data-t="with"></p>
+          <p class="script-name goldtext" data-t="brideFull"></p>
+          <p class="parents" data-t="brideParents"></p>
+          <svg class="ornament" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+          <p class="script-heading" data-t="dearHeading"></p>
+          <p class="invite-text" data-t="inviteBody"></p>
+        </div>
+        <svg class="invite-flowers invite-flowers--l" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+        <svg class="invite-flowers invite-flowers--r" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+      </div>
+    </section>
+
+    <!-- Countdown -->
+    <section class="block">
+      <h2 class="script-heading" data-t="countdownHeading"></h2>
+      <svg class="ornament" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+      <div class="countdown" id="countdown">
+        <div class="cd"><span class="cd__num" data-unit="d">00</span><span class="cd__label" data-t="days"></span></div>
+        <span class="cd__sep" aria-hidden="true">:</span>
+        <div class="cd"><span class="cd__num" data-unit="h">00</span><span class="cd__label" data-t="hours"></span></div>
+        <span class="cd__sep" aria-hidden="true">:</span>
+        <div class="cd"><span class="cd__num" data-unit="m">00</span><span class="cd__label" data-t="minutes"></span></div>
+        <span class="cd__sep" aria-hidden="true">:</span>
+        <div class="cd"><span class="cd__num" data-unit="s">00</span><span class="cd__label" data-t="seconds"></span></div>
+      </div>
+      <p class="countdown-done script-heading" id="countdownDone" data-t="countdownDone" hidden></p>
+    </section>
+
+    <!-- Scratch to reveal the date -->
+    <section class="block">
+      <h2 class="script-heading" data-t="dateHeading"></h2>
+      <svg class="ornament" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+      <div class="scratch" id="scratch">
+        <div class="scratch__under">
+          <span class="scratch__weekday" id="sWeekday"></span>
+          <span class="scratch__day" id="sDay"></span>
+          <span class="scratch__month" id="sMonth"></span>
+        </div>
+        <canvas class="scratch__foil" id="scratchCanvas" aria-label="Gold foil. Scratch to reveal the date."></canvas>
+        <svg class="scratch__rim" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M50 97 C20 76 2 58 2 33 C2 15 15 3 30 3 C40 3 46 9 50 17 C54 9 60 3 70 3 C85 3 98 15 98 33 C98 58 80 76 50 97 Z" vector-effect="non-scaling-stroke" />
+        </svg>
+        <span class="sparkles" id="sparkles" aria-hidden="true"></span>
+      </div>
+      <p class="scratch-hint" id="scratchHint">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11 V5.5 a1.5 1.5 0 0 1 3 0 V11 M12 10 V8.5 a1.5 1.5 0 0 1 3 0 V11 M15 10.5 a1.5 1.5 0 0 1 3 0 V15 c0 3.5 -2.5 6 -6 6 c-2.6 0 -4.2 -1.3 -5.4 -3.3 L4.4 14 a1.5 1.5 0 0 1 2.6 -1.5 L9 15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <span data-t="scratchHint"></span>
+      </p>
+    </section>
+
+    <!-- Timeline -->
+    <section class="block">
+      <h2 class="script-heading" data-t="timelineHeading"></h2>
+      <svg class="ornament" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+      <ol class="timeline" id="timeline"></ol>
+    </section>
+
+    <!-- Venue -->
+    <section class="block">
+      <h2 class="script-heading" data-t="venueHeading"></h2>
+      <svg class="ornament" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+      <p class="venue-name" data-t="venueName"></p>
+      <p class="venue-addr" data-t="venueAddress"></p>
+      <div class="map-frame">
+        <iframe id="mapFrame" title="Map of the venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+      <a class="btn btn--gold" id="mapLink" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21 s-7 -6.2 -7 -11 a7 7 0 1 1 14 0 c0 4.8 -7 11 -7 11 z" /><circle cx="12" cy="10" r="2.5" /></g></svg>
+        <span data-t="viewMap"></span>
+      </a>
+    </section>
+
+    <!-- Attire -->
+    <section class="block">
+      <h2 class="script-heading" data-t="attireHeading"></h2>
+      <svg class="ornament" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+      <svg class="attire-icon" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-hanger" /></svg>
+      <p class="body-text" data-t="attireBody"></p>
+      <div class="swatches" id="swatches"></div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="block" id="rsvp">
+      <h2 class="script-heading" data-t="rsvpHeading"></h2>
+      <svg class="ornament" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+      <p class="rsvp-sub" id="rsvpSub"></p>
+
+      <form class="rsvp" id="rsvpForm" novalidate>
+        <label class="field">
+          <span data-t="fName"></span>
+          <input name="name" id="rsvpName" autocomplete="name" maxlength="80" />
+        </label>
+        <label class="field">
+          <span><span data-t="fPhone"></span> <em data-t="optional"></em></span>
+          <input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" />
+        </label>
+        <fieldset class="choice">
+          <legend data-t="fComing"></legend>
+          <label class="choice__tile"><input type="radio" name="attending" value="Yes" /><span data-t="yes"></span></label>
+          <label class="choice__tile"><input type="radio" name="attending" value="No" /><span data-t="no"></span></label>
+        </fieldset>
+        <div class="field" id="guestsField" hidden>
+          <span id="guestsLabel" data-t="fGuests"></span>
+          <div class="stepper" role="group" aria-labelledby="guestsLabel">
+            <button type="button" data-step="-1" aria-label="−1">−</button>
+            <output id="guestsOut" aria-live="polite">1</output>
+            <button type="button" data-step="1" aria-label="+1">+</button>
+          </div>
+        </div>
+        <label class="field">
+          <span><span data-t="fMessage"></span> <em data-t="optional"></em></span>
+          <textarea name="message" rows="3" maxlength="500"></textarea>
+        </label>
+        <p class="rsvp-error" id="rsvpError" role="alert"></p>
+        <button class="btn btn--gold btn--wide" id="rsvpSubmit" type="submit" data-t="send"></button>
+      </form>
+
+      <div class="rsvp-done" id="rsvpDone" tabindex="-1" hidden>
+        <svg viewBox="0 0 160 90" class="rings rings--done" aria-hidden="true">
+          <circle class="ring ring--1" cx="62" cy="52" r="30" pathLength="1" />
+          <circle class="ring ring--2" cx="98" cy="52" r="30" pathLength="1" />
+        </svg>
+        <p class="script-heading rsvp-done__title" id="doneTitle"></p>
+        <p class="body-text" id="doneText"></p>
+        <button class="link-btn" type="button" id="rsvpAgain" data-t="change"></button>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <footer class="closing">
+      <p class="caps" data-t="blessing"></p>
+      <p class="closing-names goldtext"><span data-t="groomShort"></span><span class="closing-and" data-t="and"></span><span data-t="brideShort"></span></p>
+      <p class="closing-date" id="closingDate"></p>
+      <svg class="ornament" viewBox="0 0 160 20" aria-hidden="true"><use href="#flourish" /></svg>
+      <p class="credit"><span data-t="credit"></span><br /><em data-t="joke"></em></p>
+      <svg class="closing-flowers closing-flowers--l" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+      <svg class="closing-flowers closing-flowers--r" viewBox="-120 -120 240 240" aria-hidden="true"><use href="#cluster" x="-120" y="-120" width="240" height="240" /></svg>
+    </footer>
+  </div>
+</main>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
