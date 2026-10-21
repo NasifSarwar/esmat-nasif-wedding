@@ -305,7 +305,7 @@ button { font: inherit; }
   z-index: 5;
   left: 50%;
   top: 50%;
-  width: clamp(112px, 30vw, 146px);
+  width: clamp(150px, 42vw, 190px);
   aspect-ratio: 1;
   translate: -50% -50%;
   transition: transform .8s var(--ease), opacity .7s ease;
@@ -365,7 +365,7 @@ button { font: inherit; }
   place-items: center;
   font-family: var(--f-script);
   font-weight: 400;
-  font-size: clamp(1.7rem, 7.4vw, 2.25rem);
+  font-size: clamp(1.75rem, 7.6vw, 2.2rem);
   letter-spacing: 0;
   padding-top: .1em;
   background: linear-gradient(110deg, #7A5C2E 10%, #C9A462 40%, #F3DFAE 52%, #A9844C 70%);
@@ -389,7 +389,7 @@ button { font: inherit; }
 }
 
 .env-hint {
-  top: calc(50% - clamp(56px, 15vw, 73px) - 3rem);
+  top: calc(50% - clamp(75px, 21vw, 95px) - 3.2rem);
   font-style: italic;
   font-size: 1.12rem;
   color: var(--ink-soft);
@@ -1305,12 +1305,12 @@ html[lang="bn"] .credit em { font-style: normal; }
   filter: drop-shadow(0 2px 2px rgba(110, 85, 50, .22));
 }
 
-.side-strand--left { left: -14px; }
-.side-strand--right { right: -14px; transform: scaleX(-1); }
+.side-strand--left { left: -4px; }
+.side-strand--right { right: -4px; transform: scaleX(-1); }
 
 @media (min-width: 760px) {
-  .side-strand--left { left: max(2%, calc(50% - 400px)); }
-  .side-strand--right { right: max(2%, calc(50% - 400px)); }
+  .side-strand--left { left: max(2%, calc(50% - 350px)); }
+  .side-strand--right { right: max(2%, calc(50% - 350px)); }
 }
 
 /* pearls in the corners of the map and RSVP card */
@@ -1352,3 +1352,54 @@ html[lang="bn"] .attire-closing { font-family: "Galada", cursive; font-size: cla
 .band--contacts .btn--line:hover { background: rgba(255, 255, 255, .2); }
 
 .closing { margin-top: 80px; padding-top: 96px; }
+
+/* seal: finer rings, more room around E&N */
+.seal__ring { stroke-width: 1.4; }
+.seal__mono { padding-top: .06em; }
+
+/* compact RSVP */
+#rsvp .card { padding: 34px clamp(16px, 5vw, 32px) 28px; max-width: 460px; margin: 0 auto; }
+#rsvp .rsvp-sub { margin: -14px 0 16px; font-size: 1.02rem; }
+#rsvp .rsvp { gap: 12px; }
+#rsvp .field { gap: 4px; }
+#rsvp .field > span, #rsvp .choice legend { font-size: .98rem; }
+#rsvp .field input, #rsvp .field textarea { padding: .5rem .75rem; font-size: 1.02rem; border-radius: 5px; }
+#rsvp .field textarea { min-height: 64px; }
+#rsvp .choice legend { margin-bottom: 4px; }
+#rsvp .choice__tile span { min-height: 44px; padding: .45rem .8rem; font-size: 1.02rem; }
+#rsvp .stepper button { width: 42px; height: 42px; }
+#rsvp .stepper output { font-size: 1.25rem; }
+#rsvp .btn--wide { min-height: 46px; padding: .7rem 1.4rem; margin-top: 4px; }
+#rsvp .pearl-divider { margin-bottom: 20px; }
+#rsvp .choice { grid-template-columns: 1fr 1fr; gap: 8px; }
+#rsvp .choice__tile span { font-size: .98rem; padding: .4rem .5rem; }
+#rsvp .field textarea { min-height: 56px; height: 64px; }
+
+/* pearl oval around the invitation text */
+.pearl-oval {
+  position: absolute;
+  z-index: 3;
+  inset: 16px;
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(30, 40, 25, .3));
+}
+.frame--invite { padding-left: clamp(24px, 6.5vw, 56px); padding-right: clamp(24px, 6.5vw, 56px); }
+.inv-name.fit { padding-left: 0; padding-right: 0; }
+
+/* side strands: sized by script to match the RSVP card / attire content */
+.side-strand { top: 0; height: auto; aspect-ratio: auto; }
+
+/* band pearl edges always on top of neighbouring decorations */
+.band::before, .band::after { z-index: 6; }
+.frame--invite .inv-line1 { font-size: clamp(1.55rem, 6.4vw, 2.4rem); max-width: 92%; margin-left: auto; margin-right: auto; }
+
+.copyright {
+  margin: 18px 0 0;
+  font-family: var(--f-caps);
+  font-size: .72rem;
+  letter-spacing: .16em;
+  color: #A8957C;
+}

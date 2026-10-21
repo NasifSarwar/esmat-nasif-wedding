@@ -45,7 +45,7 @@ window.WEDDING = {
     { name: "Powder blue",  hex: "#BCD3E6" },
     { name: "Lavender",     hex: "#D5C9E8" },
     { name: "Butter yellow",hex: "#F5E6A6" },
-    { name: "Light gold",   hex: "#DCC38A" },
+    { name: "Light grey",   hex: "#D8D8D4" },
   ],
 
   // Phone numbers: Bangladesh numbers as written locally
@@ -139,7 +139,7 @@ window.WEDDING = {
       groomSide: "Groom's side",
       call: "Call",
 
-      blessing: "Jazakallahu khairan. May Allah bless this union.",
+      blessing: "Jazakallahu khairan. May Allah bless our union.",
       credit: "Designed and coded by the bride and groom.",
       joke: "We had to use our software engineering degrees somewhere.",
       musicOn: "Play music",
@@ -216,7 +216,7 @@ window.WEDDING = {
       groomSide: "বর পক্ষ",
       call: "কল",
 
-      blessing: "জাযাকাল্লাহু খাইরান। আল্লাহ এই বন্ধনে বরকত দিন।",
+      blessing: "জাযাকাল্লাহু খাইরান। আল্লাহ আমাদের বন্ধনে বরকত দিন।",
       credit: "এই ওয়েবসাইটটি বর ও কনে নিজেরাই ডিজাইন ও কোড করেছে।",
       joke: "সফটওয়্যার ইঞ্জিনিয়ারিং ডিগ্রিটা কোথাও তো কাজে লাগাতে হবে!",
       musicOn: "মিউজিক চালু করুন",

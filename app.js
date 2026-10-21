@@ -57,6 +57,7 @@
     $("guestsOut").textContent = num(guests);
     if (!$("rsvpDone").hidden && lastReply) showDone(lastReply.name, lastReply.attending, true);
     updateMusicLabel();
+    setTimeout(layoutPearls, 50);
   }
 
   $("langBtn").addEventListener("click", function () {
@@ -74,21 +75,12 @@
     var max = parseFloat(getComputedStyle(els[0]).fontSize);
     // the size at which each name fits on one line
     var fits = els.map(function (el) {
-      var avail = el.clientWidth, need = el.scrollWidth;
+      var avail = el.clientWidth - 20, need = el.scrollWidth; // leave room before the pearls
       return need > avail ? Math.floor(max * avail / need) - 1 : max;
     });
+    // always one line: both names shrink together to the size that fits the longest
     var common = Math.min.apply(null, fits);
-    if (common >= max * .78) {
-      // every name fits on one line at a good size: use the same size for all
-      els.forEach(function (el) { el.style.fontSize = common + "px"; });
-    } else {
-      // too small: keep a readable size; long names split into two even lines
-      var size = Math.round(max * .9);
-      els.forEach(function (el, i) {
-        el.style.fontSize = size + "px";
-        if (fits[i] < size) { el.style.whiteSpace = ""; el.classList.add("is-wrapped"); }
-      });
-    }
+    els.forEach(function (el) { el.style.fontSize = common + "px"; });
   }
 
   var fitTimer;
@@ -112,7 +104,7 @@
 
   /* pearl strands: place pearls along each curve */
   var SVGNS = "http://www.w3.org/2000/svg";
-  document.querySelectorAll("svg.strand").forEach(function (svg) {
+  document.querySelectorAll("svg.strand:not(.pearl-fit)").forEach(function (svg) {
     var path = document.createElementNS(SVGNS, "path");
     path.setAttribute("d", svg.dataset.path);
     path.setAttribute("fill", "none");
@@ -134,6 +126,63 @@
       i++;
     }
   });
+
+  /* pearls drawn to the real size of the element, so every pearl is the same size */
+  var PEARL_GAP = 11.5, PEARL_R = 4;
+  function pearlPath(svg, d) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var path = document.createElementNS(SVGNS, "path");
+    path.setAttribute("d", d);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "#CDBB9C");
+    path.setAttribute("stroke-width", ".6");
+    svg.appendChild(path);
+    var len = path.getTotalLength(), i = 0;
+    for (var t = PEARL_GAP / 2; t < len - PEARL_GAP / 3; t += PEARL_GAP) {
+      var p = path.getPointAtLength(t), big = i % 7 === 3;
+      var c = document.createElementNS(SVGNS, "circle");
+      c.setAttribute("cx", p.x.toFixed(1));
+      c.setAttribute("cy", p.y.toFixed(1));
+      c.setAttribute("r", (big ? PEARL_R * 1.35 : PEARL_R * (0.88 + 0.12 * Math.sin(i))).toFixed(2));
+      c.setAttribute("fill", "url(#pearl)");
+      svg.appendChild(c);
+      if (big) t += PEARL_R * .5;
+      i++;
+    }
+  }
+
+  function layoutPearls() {
+    document.querySelectorAll("svg.pearl-fit").forEach(function (svg) {
+      var shape = svg.dataset.shape, w, h, d;
+      if (shape === "line") {
+        var section = svg.closest("section");
+        var target = section && section.querySelector(svg.dataset.match);
+        if (!target) return;
+        var top = target.getBoundingClientRect().top - section.getBoundingClientRect().top;
+        h = Math.round(target.offsetHeight);
+        w = 26;
+        svg.style.top = Math.round(top) + "px";
+        svg.style.height = h + "px";
+        svg.style.width = w + "px";
+        d = "M18 0 C5 " + (h * .3) + " 5 " + (h * .7) + " 18 " + h;
+      } else {
+        w = svg.clientWidth; h = svg.clientHeight;
+        if (!w || !h) return;
+        var m = 6, rr = Math.min(w * .42, h * .22), x0 = m, y0 = m, x1 = w - m, y1 = h - m;
+        d = "M" + (x0 + rr) + " " + y0 + " H" + (x1 - rr) + " A" + rr + " " + rr + " 0 0 1 " + x1 + " " + (y0 + rr) +
+            " V" + (y1 - rr) + " A" + rr + " " + rr + " 0 0 1 " + (x1 - rr) + " " + y1 +
+            " H" + (x0 + rr) + " A" + rr + " " + rr + " 0 0 1 " + x0 + " " + (y1 - rr) +
+            " V" + (y0 + rr) + " A" + rr + " " + rr + " 0 0 1 " + (x0 + rr) + " " + y0 + " Z";
+      }
+      svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+      pearlPath(svg, d);
+    });
+  }
+
+  var pearlTimer;
+  window.addEventListener("resize", function () { clearTimeout(pearlTimer); pearlTimer = setTimeout(layoutPearls, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutPearls);
+  window.addEventListener("load", layoutPearls);
 
   /* ---------------- map ---------------- */
 
@@ -321,6 +370,7 @@
     window.scrollTo(0, 0);
     setTimeout(function () { intro.hidden = true; }, 1300);
     $("page").focus({ preventScroll: true });
+    setTimeout(layoutPearls, 50);
   }
 
   // intro: the ayah, then our names, then the date — then the invitation
