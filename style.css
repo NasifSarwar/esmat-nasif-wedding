@@ -1403,3 +1403,11 @@ html[lang="bn"] .attire-closing { font-family: "Galada", cursive; font-size: cla
   letter-spacing: .16em;
   color: #A8957C;
 }
+
+/* closing blessing: two lines on phones, one line on wider screens */
+.blessing__2 { display: block; }
+@media (min-width: 700px) {
+  .closing .wrap { max-width: 760px; }
+  .blessing { white-space: nowrap; }
+  .blessing__2 { display: inline; }
+}

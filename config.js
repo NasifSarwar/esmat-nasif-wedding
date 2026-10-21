@@ -139,7 +139,8 @@ window.WEDDING = {
       groomSide: "Groom's side",
       call: "Call",
 
-      blessing: "Jazakallahu khairan. May Allah bless our union.",
+      blessing1: "Jazakallahu khairan.",
+      blessing2: "May Allah bless our union.",
       credit: "Designed and coded by the bride and groom.",
       joke: "We had to use our software engineering degrees somewhere.",
       musicOn: "Play music",
@@ -216,7 +217,8 @@ window.WEDDING = {
       groomSide: "বর পক্ষ",
       call: "কল",
 
-      blessing: "জাযাকাল্লাহু খাইরান। আল্লাহ আমাদের বন্ধনে বরকত দিন।",
+      blessing1: "জাযাকাল্লাহু খাইরান।",
+      blessing2: "আল্লাহ আমাদের বন্ধনে বরকত দিন।",
       credit: "এই ওয়েবসাইটটি বর ও কনে নিজেরাই ডিজাইন ও কোড করেছে।",
       joke: "সফটওয়্যার ইঞ্জিনিয়ারিং ডিগ্রিটা কোথাও তো কাজে লাগাতে হবে!",
       musicOn: "মিউজিক চালু করুন",
