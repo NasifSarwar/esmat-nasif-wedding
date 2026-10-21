@@ -1411,3 +1411,12 @@ html[lang="bn"] .attire-closing { font-family: "Galada", cursive; font-size: cla
   .blessing { white-space: nowrap; }
   .blessing__2 { display: inline; }
 }
+
+/* Bangla: keep the credit's first line together */
+html[lang="bn"] .credit { max-width: 34rem; }
+html[lang="bn"] .credit > span { white-space: nowrap; }
+@media (max-width: 480px) { html[lang="bn"] .credit > span { font-size: min(.92rem, 3.55vw); } }
+
+/* save-the-date line: always one line, shrinks to fit */
+.save-date { white-space: nowrap; font-size: min(1.85rem, 5vw); letter-spacing: .05em; }
+html[lang="bn"] .save-date { font-size: min(clamp(1.45rem, 6.6vw, 2.1rem), 6.2vw); }

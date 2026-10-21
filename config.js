@@ -52,10 +52,10 @@ window.WEDDING = {
   contacts: {
     bride: [
       { name: { en: "Mohammad Enamul Haque Khan", bn: "মোহাম্মদ এনামুল হক খান" }, phone: "01711617527" },
-      { name: { en: "Salman Khan Shihan",         bn: "সালমান খান শিহান" },       phone: "01777679713" },
+      { name: { en: "Salman Khan Shihan",         bn: "সালমান খান সিহান" },       phone: "01777679713" },
     ],
     groom: [
-      { name: { en: "Mehedi Al Redoy",  bn: "মেহেদী আল রেদয়" },  phone: "01706544002" },
+      { name: { en: "Mehedi Al Redoy",  bn: "মেহেদী আল রিদয়" },  phone: "01706544002" },
       { name: { en: "Mahfuzur Rahman",  bn: "মাহফুজুর রহমান" }, phone: "01521572275" },
     ],
   },
@@ -97,7 +97,7 @@ window.WEDDING = {
       countdownDone: "Alhamdulillah, the day is here",
 
       saveHeading: "Save the date",
-      saveDate: "5th December 2026",
+      saveDate: "5th December 2026, Saturday",
       addCalendar: "Add to Calendar",
       otherCalendar: "Apple / Outlook calendar (.ics)",
 
@@ -150,7 +150,7 @@ window.WEDDING = {
     bn: {
       langSwitch: "English",
       skip: "এড়িয়ে যান",
-      tapToOpen: "খুলতে সিলে চাপুন",
+      tapToOpen: "সিলটি খোলার জন্য ক্লিক করুন",
       forGuest: "প্রিয়",
       guestDefault: "অতিথি",
       tapToContinue: "চালিয়ে যেতে চাপুন",
@@ -161,21 +161,21 @@ window.WEDDING = {
 
       inviteLine1: "মহান আল্লাহর রহমতে,",
       inviteLine2: "আমাদের শুভ আকদ অনুষ্ঠানে আপনাকে সাদর আমন্ত্রণ জানাচ্ছি",
-      brideShort: "ইসমাত",
+      brideShort: "ইসমত",
       groomShort: "নাসিফ",
-      brideFull: "ইসমাত জাহান খান বৃষ্টি",
+      brideFull: "ইসমত জাহান খান বৃষ্টি",
       brideParents: "(মোহাম্মদ এনামুল হক খান ও\nসালেহা বেগমের কন্যা)",
       and: "ও",
-      groomFull: "মোঃ নাসিফ সারওয়ার",
+      groomFull: "মোঃ নাসিফ সারোয়ার",
       groomParents: "(মোঃ শহিদুল ইসলাম ও\nনাসিমা আক্তারের পুত্র)",
       scroll: "নিচে স্ক্রল করুন",
 
-      countdownHeading: "আমাদের বিয়ের ক্ষণগণনা",
+      countdownHeading: "আমাদের বিয়ের আর মাত্র কয়েকটা দিন...",
       days: "দিন", hours: "ঘণ্টা", minutes: "মিনিট", seconds: "সেকেন্ড",
       countdownDone: "আলহামদুলিল্লাহ, আজই সেই দিন",
 
       saveHeading: "তারিখটি মনে রাখবেন",
-      saveDate: "৫ ডিসেম্বর ২০২৬",
+      saveDate: "৫ই ডিসেম্বর ২০২৬, শনিবার",
       addCalendar: "ক্যালেন্ডারে যোগ করুন",
       otherCalendar: "Apple / Outlook ক্যালেন্ডার (.ics)",
 
@@ -186,8 +186,8 @@ window.WEDDING = {
       venueAddress: "মাদানী অ্যাভিনিউ, সাতারকুল, ঢাকা, বাংলাদেশ, ১২১২",
       viewMap: "গুগল ম্যাপে দেখুন",
 
-      attireHeading: "পোশাক",
-      attireBody: "হালকা বা প্যাস্টেল রঙের পোশাকে আমাদের সাথে উদযাপন করলে খুশি হব। ঐতিহ্যবাহী ও ফরমাল দুই ধরনের পোশাকই স্বাগত।",
+      attireHeading: "পোশাকের রং ও ধরন",
+      attireBody: "আমাদের বিশেষ দিনটিকে আরও রঙিন করে তুলতে হালকা ও প্যাস্টেল রঙের পোশাকে আপনাদের পাশে পেলে আমরা খুবই আনন্দিত হব। ঐতিহ্যবাহী ও ফরমাল উভয় ধরনের পোশাকই সাদরে স্বাগত।",
       attireClosing: "এই বিশেষ দিনটি আপনাদের সাথে উদযাপনের অপেক্ষায় আছি!",
 
       rsvpHeading: "উপস্থিতি নিশ্চিত করুন",
