@@ -99,10 +99,47 @@
       </g>
     </symbol>
 
+    <linearGradient id="sage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A9B99B" /><stop offset=".55" stop-color="#8A9C7E" /><stop offset="1" stop-color="#6F8063" />
+    </linearGradient>
+    <linearGradient id="sageLight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D3DCC7" /><stop offset="1" stop-color="#A9B99B" />
+    </linearGradient>
+
+    <!-- sage eucalyptus branch -->
+    <symbol id="eucalyptus" viewBox="0 0 140 140" overflow="visible">
+      <path d="M4 136 C40 104 80 64 136 6" fill="none" stroke="#7D8E70" stroke-width="1.4" stroke-linecap="round" />
+      <g stroke="#6F8063" stroke-width=".6">
+        <ellipse cx="22" cy="112" rx="11" ry="9" fill="url(#sage)" transform="rotate(-30 22 112)" />
+        <ellipse cx="40" cy="108" rx="10" ry="8" fill="url(#sageLight)" transform="rotate(20 40 108)" />
+        <ellipse cx="44" cy="86" rx="11" ry="9" fill="url(#sageLight)" transform="rotate(-40 44 86)" />
+        <ellipse cx="64" cy="84" rx="10" ry="8" fill="url(#sage)" transform="rotate(15 64 84)" />
+        <ellipse cx="66" cy="62" rx="10" ry="8" fill="url(#sage)" transform="rotate(-40 66 62)" />
+        <ellipse cx="86" cy="60" rx="9" ry="7.5" fill="url(#sageLight)" transform="rotate(10 86 60)" />
+        <ellipse cx="88" cy="40" rx="9" ry="7.5" fill="url(#sageLight)" transform="rotate(-45 88 40)" />
+        <ellipse cx="106" cy="38" rx="8" ry="6.5" fill="url(#sage)" transform="rotate(10 106 38)" />
+        <ellipse cx="112" cy="20" rx="7" ry="6" fill="url(#sage)" transform="rotate(-45 112 20)" />
+        <ellipse cx="128" cy="16" rx="6" ry="5" fill="url(#sageLight)" />
+      </g>
+    </symbol>
+
+    <!-- slim sage leaf -->
+    <symbol id="sageLeaf" viewBox="0 -10 44 20" overflow="visible">
+      <path d="M0 0 C10 -10 30 -10 44 0 C30 10 10 10 0 0 Z" fill="url(#sage)" stroke="#6F8063" stroke-width=".6" />
+      <path d="M3 0 H40" stroke="#E4EADB" stroke-width=".7" opacity=".8" />
+    </symbol>
+
     <!-- embroidered cluster for corners (flowers + sequins + sprigs) -->
     <symbol id="cluster" viewBox="-130 -130 260 260" overflow="visible">
       <use href="#sprig" x="0" y="0" width="120" height="120" transform="translate(-20 -110) scale(1.1)" />
       <use href="#sprig" x="0" y="0" width="120" height="120" transform="translate(-10 10) rotate(90) scale(.9)" />
+      <use href="#eucalyptus" x="0" y="0" width="140" height="140" transform="translate(-40 -150) rotate(8) scale(1.05)" />
+      <use href="#eucalyptus" x="0" y="0" width="140" height="140" transform="translate(-150 40) rotate(-10) scale(.95)" />
+      <use href="#eucalyptus" x="0" y="0" width="140" height="140" transform="translate(30 -20) rotate(55) scale(.7)" />
+      <use href="#sageLeaf" x="0" y="-10" width="44" height="20" transform="translate(-6 30) rotate(110) scale(1.4)" />
+      <use href="#sageLeaf" x="0" y="-10" width="44" height="20" transform="translate(30 -40) rotate(-30) scale(1.3)" />
+      <use href="#sageLeaf" x="0" y="-10" width="44" height="20" transform="translate(-70 -30) rotate(-150) scale(1.2)" />
+      <use href="#sageLeaf" x="0" y="-10" width="44" height="20" transform="translate(-60 30) rotate(160) scale(1.1)" />
       <use href="#peony" x="-50" y="-50" width="100" height="100" transform="translate(-30 -10) scale(1.05)" />
       <use href="#peony" x="-50" y="-50" width="100" height="100" transform="translate(48 -58) rotate(25) scale(.62)" />
       <use href="#peony" x="-50" y="-50" width="100" height="100" transform="translate(-90 60) rotate(-15) scale(.55)" />
@@ -217,10 +254,6 @@
   </div>
 
   <p class="env-hint" data-t="tapToOpen">Tap the seal to open</p>
-  <div class="env-to">
-    <span class="env-to__for" data-t="forGuest">For</span>
-    <span class="env-to__name" id="guestName">our dear guest</span>
-  </div>
   <button class="pill pill--skip" id="skipBtn" type="button" data-t="skip">Skip</button>
 </div>
 
@@ -274,6 +307,7 @@
 
   <!-- Save the date -->
   <section class="block">
+    <svg class="strand garland" viewBox="0 0 400 64" data-path="M8 4 C110 66 290 66 392 4" data-gap="11" data-r="3.8" aria-hidden="true"></svg>
     <div class="wrap">
       <h2 class="script-heading" data-t="saveHeading"></h2>
       <div class="pearl-divider" aria-hidden="true"></div>
@@ -297,6 +331,7 @@
 
   <!-- Venue -->
   <section class="block">
+    <svg class="strand side-strand side-strand--left" viewBox="0 0 40 600" data-path="M30 0 C4 160 4 440 30 600" data-gap="11" data-r="3.8" aria-hidden="true"></svg>
     <div class="wrap">
       <h2 class="script-heading" data-t="venueHeading"></h2>
       <div class="pearl-divider" aria-hidden="true"></div>
@@ -312,16 +347,20 @@
 
   <!-- Attire -->
   <section class="block">
+    <svg class="strand garland" viewBox="0 0 400 64" data-path="M8 4 C110 66 290 66 392 4" data-gap="11" data-r="3.8" aria-hidden="true"></svg>
+    <svg class="strand side-strand side-strand--right" viewBox="0 0 40 600" data-path="M30 0 C4 160 4 440 30 600" data-gap="11" data-r="3.8" aria-hidden="true"></svg>
     <div class="wrap">
       <h2 class="script-heading" data-t="attireHeading"></h2>
       <div class="pearl-divider" aria-hidden="true"></div>
       <p class="body-text" data-t="attireBody"></p>
       <ul class="swatches" id="swatches"></ul>
+      <p class="attire-closing" data-t="attireClosing"></p>
     </div>
   </section>
 
   <!-- RSVP -->
   <section class="block" id="rsvp">
+    <svg class="strand side-strand side-strand--left" viewBox="0 0 40 600" data-path="M30 0 C4 160 4 440 30 600" data-gap="11" data-r="3.8" aria-hidden="true"></svg>
     <div class="wrap">
       <div class="card">
         <h2 class="script-heading" data-t="rsvpHeading"></h2>
@@ -362,11 +401,11 @@
     </div>
   </section>
 
-  <!-- Contacts -->
-  <section class="block">
+  <!-- Contacts (sage band) -->
+  <section class="band band--contacts">
     <div class="wrap">
       <h2 class="script-heading" data-t="contactsHeading"></h2>
-      <div class="pearl-divider" aria-hidden="true"></div>
+      <div class="pearl-divider pearl-divider--light" aria-hidden="true"></div>
       <div class="contacts">
         <div class="contact-group"><h3 class="caps" data-t="brideSide"></h3><ul id="contactsBride"></ul></div>
         <div class="contact-group"><h3 class="caps" data-t="groomSide"></h3><ul id="contactsGroom"></ul></div>
@@ -378,8 +417,8 @@
   <footer class="closing">
     <svg class="corner-cluster corner-cluster--bl closing-cluster" viewBox="-130 -130 260 260" aria-hidden="true"><use href="#cluster" x="-130" y="-130" width="260" height="260" /></svg>
     <svg class="corner-cluster corner-cluster--br closing-cluster" viewBox="-130 -130 260 260" aria-hidden="true"><use href="#cluster" x="-130" y="-130" width="260" height="260" /></svg>
+    <svg class="strand garland" viewBox="0 0 400 64" data-path="M8 4 C110 66 290 66 392 4" data-gap="11" data-r="3.8" aria-hidden="true"></svg>
     <div class="wrap">
-      <div class="pearl-divider" aria-hidden="true"></div>
       <p class="caps" data-t="blessing"></p>
       <p class="closing-names goldtext"><span data-t="brideShort"></span><span class="closing-and" data-t="and"></span><span data-t="groomShort"></span></p>
       <p class="credit"><span data-t="credit"></span><br /><em data-t="joke"></em></p>

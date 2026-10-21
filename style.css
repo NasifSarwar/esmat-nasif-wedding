@@ -13,9 +13,10 @@
   --ink-soft: #8A7660;
 
   /* the coloured blocks — change these two to recolour them */
-  --band: #1D2A44;
-  --band-2: #26365A;
-  --band-text: #F3EBDD;
+  --band: #6F8063;
+  --band-2: #8A9C7E;
+  --band-text: #FBF7EC;
+  --band-gold: #F1E3BC;
 
   --f-script: "Great Vibes", "Galada", cursive;
   --f-serif: "Cormorant Garamond", "Tiro Bangla", Georgia, serif;
@@ -42,7 +43,8 @@ body {
   font-family: var(--f-serif);
   font-size: 1.0625rem;
   line-height: 1.6;
-  background: var(--satin), var(--ivory);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='380' height='540'%3E%3Cdefs%3E%3CradialGradient id='p' cx='.38' cy='.32' r='.75'%3E%3Cstop offset='0' stop-color='%23fff'/%3E%3Cstop offset='.6' stop-color='%23EFE7DA'/%3E%3Cstop offset='1' stop-color='%23C2B39B'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg fill='url(%23p)'%3E%3Ccircle cx='38' cy='64' r='4.2'/%3E%3Ccircle cx='50' cy='73' r='2.4'/%3E%3Ccircle cx='318' cy='150' r='5'/%3E%3Ccircle cx='190' cy='318' r='3'/%3E%3Ccircle cx='338' cy='430' r='3.6'/%3E%3Ccircle cx='72' cy='470' r='4.6'/%3E%3Ccircle cx='86' cy='461' r='2.4'/%3E%3Ccircle cx='250' cy='40' r='2.2'/%3E%3C/g%3E%3C/svg%3E"), var(--satin), var(--ivory);
+  background-size: 380px 540px, auto, auto;
   background-attachment: fixed;
 }
 
@@ -152,12 +154,12 @@ button { font: inherit; }
 
 .pill--lang {
   left: 14px;
-  color: #F4E9D4;
-  background: rgba(40, 46, 64, .8);
+  color: #F7F1E2;
+  background: rgba(78, 93, 68, .88);
   border: 0;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  box-shadow: 0 6px 18px -8px rgba(20, 24, 40, .6);
+  box-shadow: 0 6px 18px -8px rgba(40, 50, 30, .6);
 }
 
 .pill--lang svg { width: 18px; height: 18px; color: var(--gold-light); }
@@ -361,10 +363,11 @@ button { font: inherit; }
   inset: 0;
   display: grid;
   place-items: center;
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 600;
-  font-size: clamp(1.9rem, 8vw, 2.5rem);
-  letter-spacing: -.02em;
+  font-family: var(--f-script);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 7.4vw, 2.25rem);
+  letter-spacing: 0;
+  padding-top: .1em;
   background: linear-gradient(110deg, #7A5C2E 10%, #C9A462 40%, #F3DFAE 52%, #A9844C 70%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -612,7 +615,10 @@ button { font: inherit; }
   display: grid;
   place-items: center;
   padding: clamp(64px, 16vw, 90px) clamp(22px, 6vw, 48px);
-  background: rgba(255, 253, 248, .55);
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--band-2), rgba(138, 156, 126, 0) 70%),
+    var(--band);
+  box-shadow: 0 30px 50px -30px rgba(50, 65, 40, .55);
 }
 
 .frame-strand {
@@ -758,7 +764,7 @@ button { font: inherit; }
   padding: 76px 0 80px;
   color: var(--band-text);
   background:
-    radial-gradient(ellipse at 50% 0%, var(--band-2), rgba(38, 54, 90, 0) 70%),
+    radial-gradient(ellipse at 50% 0%, var(--band-2), rgba(138, 156, 126, 0) 70%),
     var(--band);
 }
 
@@ -777,7 +783,7 @@ button { font: inherit; }
 .band::before { top: -6px; }
 .band::after { bottom: -6px; }
 
-.band .script-heading { color: var(--gold-light); }
+.band .script-heading { color: var(--band-gold); }
 .band .pearl-divider { margin-bottom: 34px; }
 
 /* countdown */
@@ -794,8 +800,8 @@ button { font: inherit; }
   flex-direction: column;
   align-items: center;
   padding: 16px 2px 12px;
-  border: 1px solid rgba(227, 201, 143, .35);
-  background: rgba(255, 255, 255, .03);
+  border: 1px solid rgba(251, 247, 236, .45);
+  background: rgba(255, 255, 255, .07);
 }
 
 .cd__num {
@@ -816,7 +822,7 @@ button { font: inherit; }
   font-size: .62rem;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: #CDB38A;
+  color: var(--band-gold);
 }
 
 .countdown-done { margin: 0; }
@@ -891,7 +897,7 @@ button { font: inherit; }
   top: 52%;
   width: 54%;
   translate: -50% -50%;
-  color: var(--gold-light);
+  color: var(--band-gold);
 }
 
 .tl-icon__pearls {
@@ -911,7 +917,7 @@ button { font: inherit; }
   font-style: italic;
   font-size: 1.45rem;
   line-height: 1.2;
-  color: var(--gold-light);
+  color: var(--band-gold);
 }
 
 .tl-title {
@@ -937,7 +943,7 @@ button { font: inherit; }
   color: #6E5332;
 }
 
-.venue-addr { margin: .3rem 0 0; font-size: 1.12rem; color: var(--ink-soft); }
+.venue-addr { margin: .3rem auto 0; max-width: 30ch; font-size: 1.12rem; color: var(--ink-soft); font-variant-numeric: lining-nums; text-wrap: balance; }
 
 .map-frame {
   position: relative;
@@ -1251,3 +1257,98 @@ html[lang="bn"] .credit em { font-style: normal; }
   .ring-stone { opacity: 1; }
   .tl-item { opacity: 1; transform: none; }
 }
+
+/* =========================================================
+   SAGE + PEARL ADDITIONS
+   ========================================================= */
+
+.band .pearl-divider::after { box-shadow: 0 0 0 3px var(--band); }
+
+/* invitation card: same sage as the blocks, ivory + pale gold text */
+.frame--invite { border-color: rgba(241, 227, 188, .8); }
+.frame--invite::before { border-color: rgba(251, 247, 236, .55); }
+.frame--invite .goldtext {
+  background-image: linear-gradient(100deg, #E9D7A8 0%, #FBF1D2 30%, #F1E3BC 50%, #D9C08A 70%, #E9D7A8 100%);
+}
+.frame--invite .inv-line1,
+.frame--invite .inv-and { color: var(--band-gold); }
+.frame--invite .inv-line2 { color: var(--band-text); }
+.frame--invite .inv-parents { color: #EEF1E6; white-space: pre-line; font-size: clamp(.95rem, 3.9vw, 1.1rem); max-width: none; }
+
+/* pearl garlands and side strands */
+.block, .closing { position: relative; }
+
+.garland {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 22px;
+  width: min(86%, 460px);
+  aspect-ratio: 400 / 64;
+  translate: -50% 0;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(110, 85, 50, .22));
+}
+
+.closing .garland { top: 0; }
+
+.side-strand {
+  position: absolute;
+  z-index: 1;
+  top: 12%;
+  height: 76%;
+  width: auto;
+  aspect-ratio: 40 / 600;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(110, 85, 50, .22));
+}
+
+.side-strand--left { left: -14px; }
+.side-strand--right { right: -14px; transform: scaleX(-1); }
+
+@media (min-width: 760px) {
+  .side-strand--left { left: max(2%, calc(50% - 400px)); }
+  .side-strand--right { right: max(2%, calc(50% - 400px)); }
+}
+
+/* pearls in the corners of the map and RSVP card */
+.map-frame::after,
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  pointer-events: none;
+  background:
+    var(--pearl-dot) 0 0 / 12px 12px no-repeat,
+    var(--pearl-dot) 100% 0 / 12px 12px no-repeat,
+    var(--pearl-dot) 0 100% / 12px 12px no-repeat,
+    var(--pearl-dot) 100% 100% / 12px 12px no-repeat;
+}
+
+.attire-closing {
+  margin: 30px auto 0;
+  max-width: 22ch;
+  font-family: var(--f-script);
+  font-size: clamp(1.9rem, 8vw, 2.4rem);
+  line-height: 1.3;
+  color: var(--gold-deep);
+  text-wrap: balance;
+}
+
+html[lang="bn"] .attire-closing { font-family: "Galada", cursive; font-size: clamp(1.5rem, 6.4vw, 1.9rem); line-height: 1.5; }
+
+/* contacts on the sage band */
+.band--contacts { margin-top: 90px; }
+.band--contacts .contact-group h3 { color: var(--band-gold); }
+.band--contacts .contact__name { color: var(--band-text); }
+.band--contacts .contact__phone { color: #E6EBDD; }
+.band--contacts .btn--line {
+  color: var(--band-text);
+  background: rgba(255, 255, 255, .1);
+  border-color: rgba(251, 247, 236, .5);
+}
+.band--contacts .btn--line:hover { background: rgba(255, 255, 255, .2); }
+
+.closing { margin-top: 80px; padding-top: 96px; }

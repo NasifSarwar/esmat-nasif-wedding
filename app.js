@@ -46,10 +46,9 @@
     document.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = t(el.dataset.t); });
     $("langLabel").textContent = t("langSwitch");
     $("langBtn").setAttribute("aria-label", lang === "bn" ? "Switch to English" : "বাংলায় দেখুন");
-    $("guestName").textContent = guest || t("guestDefault");
     document.title = t("brideShort") + " & " + t("groomShort") + (lang === "bn" ? " — বিয়ের নিমন্ত্রণ" : " — You're invited");
     $("saveDate").textContent = t("saveDate");
-    $("introDate").textContent = num("05/12/2026");
+    $("introDate").textContent = num("05.12.2026");
     fitNames();
     renderTimeline();
     renderContacts();

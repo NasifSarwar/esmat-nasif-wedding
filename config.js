@@ -82,14 +82,14 @@ window.WEDDING = {
       ayahRef: "Surah An-Naba (78:8)",
 
       inviteLine1: "With the Blessing of Allah,",
-      inviteLine2: "we cordially invite you to the Nikkah Ceremony of",
+      inviteLine2: "We cordially invite you to the Nikkah Ceremony of",
       brideShort: "Esmat",
       groomShort: "Nasif",
       brideFull: "Esmat Jahan Khan Bristi",
-      brideParents: "(D/O. Mohammad Enamul Haque Khan & Saleha Begum)",
+      brideParents: "(D/O. Mohammad Enamul Haque Khan\n& Saleha Begum)",
       and: "&",
       groomFull: "Md. Nasif Sarwar",
-      groomParents: "(S/O. Md. Shahidul Islam & Nasima Akter)",
+      groomParents: "(S/O. Md. Shahidul Islam\n& Nasima Akter)",
       scroll: "Scroll down",
 
       countdownHeading: "Countdown to our wedding",
@@ -105,11 +105,12 @@ window.WEDDING = {
 
       venueHeading: "The venue",
       venueName: "Pepper Tree BD",
-      venueAddress: "Dhaka, Bangladesh",
+      venueAddress: "Madani Avenue, Satarkul, Dhaka, Bangladesh, 1212",
       viewMap: "Open in Google Maps",
 
       attireHeading: "Attire",
       attireBody: "We would love for you to celebrate with us in soft, light or pastel colours. Traditional and formal wear are both welcome.",
+      attireClosing: "We can't wait to celebrate this special day with you!",
 
       rsvpHeading: "RSVP",
       rsvpSub: "Kindly let us know if you can join us",
@@ -133,7 +134,7 @@ window.WEDDING = {
       errNet: "Your RSVP didn't send. Check your internet connection and try again.",
       notConnected: "RSVP isn't connected yet. Add your Google Apps Script link to rsvpEndpoint in config.js.",
 
-      contactsHeading: "For any queries",
+      contactsHeading: "For any inquiries",
       brideSide: "Bride's side",
       groomSide: "Groom's side",
       call: "Call",
@@ -162,10 +163,10 @@ window.WEDDING = {
       brideShort: "ইসমাত",
       groomShort: "নাসিফ",
       brideFull: "ইসমাত জাহান খান বৃষ্টি",
-      brideParents: "(মোহাম্মদ এনামুল হক খান ও সালেহা বেগমের কন্যা)",
+      brideParents: "(মোহাম্মদ এনামুল হক খান ও\nসালেহা বেগমের কন্যা)",
       and: "ও",
       groomFull: "মোঃ নাসিফ সারওয়ার",
-      groomParents: "(মোঃ শহিদুল ইসলাম ও নাসিমা আক্তারের পুত্র)",
+      groomParents: "(মোঃ শহিদুল ইসলাম ও\nনাসিমা আক্তারের পুত্র)",
       scroll: "নিচে স্ক্রল করুন",
 
       countdownHeading: "আমাদের বিয়ের ক্ষণগণনা",
@@ -181,11 +182,12 @@ window.WEDDING = {
 
       venueHeading: "অনুষ্ঠানস্থল",
       venueName: "পেপার ট্রি বিডি",
-      venueAddress: "ঢাকা, বাংলাদেশ",
+      venueAddress: "মাদানী অ্যাভিনিউ, সাতারকুল, ঢাকা, বাংলাদেশ, ১২১২",
       viewMap: "গুগল ম্যাপে দেখুন",
 
       attireHeading: "পোশাক",
       attireBody: "হালকা বা প্যাস্টেল রঙের পোশাকে আমাদের সাথে উদযাপন করলে খুশি হব। ঐতিহ্যবাহী ও ফরমাল দুই ধরনের পোশাকই স্বাগত।",
+      attireClosing: "এই বিশেষ দিনটি আপনাদের সাথে উদযাপনের অপেক্ষায় আছি!",
 
       rsvpHeading: "উপস্থিতি নিশ্চিত করুন",
       rsvpSub: "আপনি আসতে পারবেন কি না, অনুগ্রহ করে জানান",
