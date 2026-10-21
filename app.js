@@ -8,6 +8,7 @@
   var params = new URLSearchParams(location.search);
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var guest = (params.get("to") || "").trim().slice(0, 60);
+  var isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
 
   function store(action, key, value) {
     try {
@@ -17,28 +18,28 @@
     return null;
   }
 
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
   /* ---------------- language ---------------- */
 
   var lang = params.get("lang") || store("get", "lang") || W.defaultLanguage || "en";
   if (!W.text || !W.text[lang]) lang = "en";
 
   function t(key, vars) {
-    var s = (W.text[lang] && W.text[lang][key]);
+    var s = W.text[lang] && W.text[lang][key];
     if (s == null) s = W.text.en[key] || "";
     if (vars) Object.keys(vars).forEach(function (k) { s = s.replace("{" + k + "}", vars[k]); });
     return s;
   }
 
-  var locale = function () { return lang === "bn" ? "bn-BD" : "en-GB"; };
-  function fmtDate(iso, opts) {
-    return new Intl.DateTimeFormat(locale(), Object.assign({ timeZone: TZ }, opts)).format(new Date(iso));
-  }
   function num(n, pad) {
     var s = String(n).padStart(pad || 0, "0");
     return lang === "bn" ? s.replace(/\d/g, function (d) { return "০১২৩৪৫৬৭৮৯"[d]; }) : s;
   }
-
-  var weddingNoon = (W.weddingDate || "2026-12-05") + "T12:00:00+06:00";
 
   function applyLang() {
     document.documentElement.lang = lang;
@@ -46,21 +47,17 @@
     $("langLabel").textContent = t("langSwitch");
     $("langBtn").setAttribute("aria-label", lang === "bn" ? "Switch to English" : "বাংলায় দেখুন");
     $("guestName").textContent = guest || t("guestDefault");
-    document.title = t("groomShort") + " & " + t("brideShort") + (lang === "bn" ? " — বিয়ের নিমন্ত্রণ" : " — You're invited");
-
-    // scratch card content
-    $("sWeekday").textContent = fmtDate(weddingNoon, { weekday: "long" });
-    $("sDay").textContent = num(Number(fmtDate(weddingNoon, { day: "numeric", numberingSystem: "latn" }).replace(/\D/g, "")), 2);
-    $("sMonth").textContent = fmtDate(weddingNoon, { month: "long", year: "numeric" });
-
-    $("closingDate").textContent = fmtDate(weddingNoon, { day: "2-digit", month: "2-digit", year: "numeric" }).replace(/\//g, " · ");
-    $("rsvpSub").textContent = t("rsvpSub", { date: fmtDate(W.rsvpDeadline + "T12:00:00+06:00", { day: "numeric", month: "long" }) });
-
+    document.title = t("brideShort") + " & " + t("groomShort") + (lang === "bn" ? " — বিয়ের নিমন্ত্রণ" : " — You're invited");
+    $("saveDate").textContent = t("saveDate");
+    $("introDate").textContent = num("05/12/2026");
+    fitNames();
     renderTimeline();
+    renderContacts();
     setMap();
     tick(true);
-    if (!$("rsvpDone").hidden && lastReply) showDone(lastReply.name, lastReply.attending, true);
     $("guestsOut").textContent = num(guests);
+    if (!$("rsvpDone").hidden && lastReply) showDone(lastReply.name, lastReply.attending, true);
+    updateMusicLabel();
   }
 
   $("langBtn").addEventListener("click", function () {
@@ -69,18 +66,77 @@
     applyLang();
   });
 
+  /* ---------------- names: one line if it fits, otherwise two even lines ---------------- */
+
+  function fitNames() {
+    var els = Array.prototype.slice.call(document.querySelectorAll(".fit"));
+    if (!els.length) return;
+    els.forEach(function (el) { el.classList.remove("is-wrapped"); el.style.fontSize = ""; el.style.whiteSpace = "nowrap"; });
+    var max = parseFloat(getComputedStyle(els[0]).fontSize);
+    // the size at which each name fits on one line
+    var fits = els.map(function (el) {
+      var avail = el.clientWidth, need = el.scrollWidth;
+      return need > avail ? Math.floor(max * avail / need) - 1 : max;
+    });
+    var common = Math.min.apply(null, fits);
+    if (common >= max * .78) {
+      // every name fits on one line at a good size: use the same size for all
+      els.forEach(function (el) { el.style.fontSize = common + "px"; });
+    } else {
+      // too small: keep a readable size; long names split into two even lines
+      var size = Math.round(max * .9);
+      els.forEach(function (el, i) {
+        el.style.fontSize = size + "px";
+        if (fits[i] < size) { el.style.whiteSpace = ""; el.classList.add("is-wrapped"); }
+      });
+    }
+  }
+
+  var fitTimer;
+  window.addEventListener("resize", function () { clearTimeout(fitTimer); fitTimer = setTimeout(fitNames, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNames);
+
   /* ---------------- static content ---------------- */
 
-  $("ayahLong").textContent = W.ayahLong || "";
-  $("ayahShort").textContent = W.ayahShort || "";
-  $("monogram").textContent = W.monogram || "N&E";
+  $("bismillahText").textContent = W.bismillah || "";
+  $("ayahText").textContent = W.ayah || "";
+  $("monogram").textContent = W.monogram || "E&N";
 
   (W.attireColours || []).forEach(function (c) {
-    var s = document.createElement("span");
-    s.className = "swatch";
-    s.style.background = c;
-    $("swatches").appendChild(s);
+    var li = document.createElement("li");
+    li.className = "swatch";
+    li.style.setProperty("--c", c.hex);
+    li.title = c.name;
+    li.setAttribute("aria-label", c.name);
+    $("swatches").appendChild(li);
   });
+
+  /* pearl strands: place pearls along each curve */
+  var SVGNS = "http://www.w3.org/2000/svg";
+  document.querySelectorAll("svg.strand").forEach(function (svg) {
+    var path = document.createElementNS(SVGNS, "path");
+    path.setAttribute("d", svg.dataset.path);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "#CDBB9C");
+    path.setAttribute("stroke-width", ".6");
+    svg.appendChild(path);
+    var len = path.getTotalLength(), gap = Number(svg.dataset.gap) || 12, r = Number(svg.dataset.r) || 4;
+    var i = 0;
+    for (var d = gap / 2; d < len; d += gap) {
+      var p = path.getPointAtLength(d);
+      var c = document.createElementNS(SVGNS, "circle");
+      var big = i % 7 === 3;
+      c.setAttribute("cx", p.x.toFixed(1));
+      c.setAttribute("cy", p.y.toFixed(1));
+      c.setAttribute("r", (big ? r * 1.35 : r * (0.88 + 0.12 * Math.sin(i))).toFixed(2));
+      c.setAttribute("fill", "url(#pearl)");
+      svg.appendChild(c);
+      if (big) d += r * .5;
+      i++;
+    }
+  });
+
+  /* ---------------- map ---------------- */
 
   var venue = W.venue || {};
   $("mapLink").href = venue.mapLink || ("https://www.google.com/maps?q=" + venue.lat + "," + venue.lng);
@@ -91,10 +147,57 @@
     if (src !== mapSet) { $("mapFrame").src = src; mapSet = src; }
   }
 
+  /* ---------------- calendar ---------------- */
+
+  var cal = W.calendar || {};
+  function stamp(iso) { return new Date(iso).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); }
+  var page = location.href.split(/[?#]/)[0];
+
+  var gcal = "https://calendar.google.com/calendar/render?" + new URLSearchParams({
+    action: "TEMPLATE",
+    text: cal.title || "Wedding",
+    dates: stamp(cal.start) + "/" + stamp(cal.end),
+    location: cal.location || "",
+    details: "Invitation: " + page
+  }).toString();
+
+  var ics = [
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//esmat-nasif//wedding//EN", "BEGIN:VEVENT",
+    "UID:esmat-nasif-" + stamp(cal.start) + "@wedding",
+    "DTSTAMP:" + stamp(new Date().toISOString()),
+    "DTSTART:" + stamp(cal.start),
+    "DTEND:" + stamp(cal.end),
+    "SUMMARY:" + (cal.title || "Wedding"),
+    "LOCATION:" + (cal.location || "").replace(/,/g, "\\,"),
+    "DESCRIPTION:Invitation: " + page,
+    "BEGIN:VALARM", "TRIGGER:-P1D", "ACTION:DISPLAY", "DESCRIPTION:Wedding tomorrow", "END:VALARM",
+    "END:VEVENT", "END:VCALENDAR"
+  ].join("\r\n");
+  var icsHref = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+
+  $("icsLink").href = icsHref;
+  if (isApple) {
+    $("calBtn").href = icsHref;
+    $("calBtn").setAttribute("download", "esmat-nasif-wedding.ics");
+    $("calBtn").removeAttribute("target");
+  } else {
+    $("calBtn").href = gcal;
+  }
+
   /* ---------------- timeline ---------------- */
 
   var ARCH = "M6 124 V52 C6 30 24 18 38 12 C46 8 49 4 50 0 C51 4 54 8 62 12 C76 18 94 30 94 52 V124 Z";
-  var seen = new WeakSet();
+
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add("is-inview"); io.unobserve(e.target); }
+    });
+  }, { threshold: .25 }) : null;
+
+  function watch(el) {
+    if (!io || reduceMotion) { el.classList.add("is-inview"); return; }
+    io.observe(el);
+  }
 
   function renderTimeline() {
     var ol = $("timeline");
@@ -106,14 +209,8 @@
         '<span class="tl-marker" aria-hidden="true"></span>' +
         '<div class="tl-icon" aria-hidden="true">' +
           '<svg class="tl-icon__frame" viewBox="0 0 100 124"><path d="' + ARCH + '"/></svg>' +
-          '<svg class="tl-icon__glyph" viewBox="0 0 48 48"><use href="#i-' + item.icon + '"/></svg>' +
-          '<svg class="tl-icon__flowers" viewBox="0 0 140 46">' +
-            '<use href="#leaf" x="0" y="-10" width="40" height="20" transform="translate(40 34) rotate(200) scale(.9)"/>' +
-            '<use href="#leaf" x="0" y="-10" width="40" height="20" transform="translate(100 34) rotate(-20) scale(.9)"/>' +
-            '<use href="#peony" x="-50" y="-50" width="100" height="100" transform="translate(70 30) scale(.3)"/>' +
-            '<use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(44 34) scale(.6)"/>' +
-            '<use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(97 36) scale(.5)"/>' +
-          "</svg>" +
+          '<svg class="tl-icon__glyph" viewBox="0 0 48 48"><use href="#i-' + esc(item.icon) + '"/></svg>' +
+          '<span class="tl-icon__pearls"></span>' +
         "</div>" +
         '<div class="tl-text"><p class="tl-time"></p><p class="tl-title"></p></div>';
       li.querySelector(".tl-time").textContent = item.time[lang] || item.time.en;
@@ -123,19 +220,37 @@
     });
   }
 
-  /* reveal on scroll */
-  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add("is-inview"); io.unobserve(e.target); }
-    });
-  }, { threshold: .25 }) : null;
+  /* ---------------- contacts ---------------- */
 
-  function watch(el) {
-    if (!io || reduceMotion || document.body.classList.contains("is-revealed-all")) { el.classList.add("is-inview"); return; }
-    io.observe(el);
+  function phoneParts(local) {
+    var digits = String(local).replace(/\D/g, "");
+    var intl = digits.indexOf("880") === 0 ? digits : "88" + digits;
+    var shown = digits.length === 11 ? digits.slice(0, 5) + " " + digits.slice(5) : digits;
+    return { intl: intl, shown: num(shown) };
   }
 
-  document.querySelectorAll(".verse-card").forEach(watch);
+  function renderContacts() {
+    var groups = W.contacts || {};
+    [["bride", "contactsBride"], ["groom", "contactsGroom"]].forEach(function (g) {
+      var ul = $(g[1]);
+      ul.innerHTML = "";
+      (groups[g[0]] || []).forEach(function (c) {
+        var p = phoneParts(c.phone);
+        var li = document.createElement("li");
+        li.innerHTML =
+          '<span class="contact__name"></span>' +
+          '<span class="contact__phone"></span>' +
+          '<span class="contact__btns">' +
+            '<a class="btn btn--line" href="tel:+' + p.intl + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="c-call"></span></a>' +
+            '<a class="btn btn--line" target="_blank" rel="noopener" href="https://wa.me/' + p.intl + '"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c.3 1.8 2 3.6 4 4.3l1.2-1.1 1.6.8c-.2 1-1 1.6-2 1.6-3 0-6-3-6-6 0-1 .6-1.8 1.6-2l.8 1.6z"/></g></svg>WhatsApp</a>' +
+          "</span>";
+        li.querySelector(".contact__name").textContent = c.name[lang] || c.name.en;
+        li.querySelector(".contact__phone").textContent = p.shown;
+        li.querySelector(".c-call").textContent = t("call");
+        ul.appendChild(li);
+      });
+    });
+  }
 
   /* ---------------- countdown ---------------- */
 
@@ -166,189 +281,78 @@
     });
     return true;
   }
-  if (tick(true)) {
-    var cdTimer = setInterval(function () { if (!tick()) clearInterval(cdTimer); }, 1000);
-  }
-
-  /* ---------------- scratch to reveal ---------------- */
-
-  var scratch = $("scratch"), canvas = $("scratchCanvas"), ctx = canvas.getContext("2d");
-  var heartPts = [], revealed = false, drawing = false, lastPt = null, moves = 0;
-  var HEART = "M.5 .97 C.2 .76 .02 .58 .02 .33 C.02 .15 .15 .03 .3 .03 C.4 .03 .46 .09 .5 .17 C.54 .09 .6 .03 .7 .03 C.85 .03 .98 .15 .98 .33 C.98 .58 .8 .76 .5 .97 Z";
-
-  function paintFoil() {
-    var r = canvas.getBoundingClientRect();
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(r.width * dpr);
-    canvas.height = Math.round(r.height * dpr);
-    var w = canvas.width, h = canvas.height;
-    ctx.globalCompositeOperation = "source-over";
-
-    var g = ctx.createLinearGradient(0, 0, w, h);
-    g.addColorStop(0, "#9C7A45"); g.addColorStop(.25, "#D9BC80"); g.addColorStop(.45, "#F4E1B2");
-    g.addColorStop(.6, "#C9A462"); g.addColorStop(.8, "#E8CF98"); g.addColorStop(1, "#8A6A3A");
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
-
-    // glitter
-    for (var i = 0; i < w * h / 90; i++) {
-      var a = Math.random();
-      ctx.fillStyle = a > .5 ? "rgba(255,248,225," + (Math.random() * .7) + ")" : "rgba(110,80,40," + (Math.random() * .25) + ")";
-      ctx.fillRect(Math.random() * w, Math.random() * h, dpr * (Math.random() < .1 ? 2 : 1), dpr * (Math.random() < .1 ? 2 : 1));
-    }
-
-    // points inside the heart, used to measure how much is scratched
-    var path = new Path2D();
-    path.addPath(new Path2D(HEART), new DOMMatrix().scale(w, h));
-    heartPts = [];
-    var step = Math.max(6, Math.round(w / 40));
-    for (var y = 0; y < h; y += step) for (var x = 0; x < w; x += step) {
-      if (ctx.isPointInPath(path, x, y)) heartPts.push(x, y);
-    }
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.lineWidth = w * .15;
-  }
-
-  function point(e) {
-    var r = canvas.getBoundingClientRect();
-    return { x: (e.clientX - r.left) * canvas.width / r.width, y: (e.clientY - r.top) * canvas.height / r.height };
-  }
-
-  function scratchTo(p) {
-    ctx.beginPath();
-    ctx.moveTo(lastPt.x, lastPt.y);
-    ctx.lineTo(p.x + .01, p.y);
-    ctx.stroke();
-    lastPt = p;
-  }
-
-  function clearedShare() {
-    var data = ctx.getImageData(0, 0, canvas.width, canvas.height).data, clear = 0, n = heartPts.length / 2;
-    for (var i = 0; i < heartPts.length; i += 2) {
-      if (data[(heartPts[i + 1] * canvas.width + heartPts[i]) * 4 + 3] < 40) clear++;
-    }
-    return n ? clear / n : 0;
-  }
-
-  function reveal() {
-    if (revealed) return;
-    revealed = true;
-    scratch.classList.add("is-revealed");
-    $("scratchHint").classList.add("is-done");
-    if (reduceMotion) return;
-    var box = $("sparkles");
-    for (var i = 0; i < 26; i++) {
-      var s = document.createElement("span");
-      s.className = "spark";
-      var ang = Math.random() * Math.PI * 2, dist = 60 + Math.random() * 90;
-      s.style.left = "50%"; s.style.top = "48%";
-      s.style.setProperty("--x", Math.cos(ang) * dist + "px");
-      s.style.setProperty("--y", Math.sin(ang) * dist + "px");
-      s.style.animationDelay = Math.random() * .25 + "s";
-      box.appendChild(s);
-    }
-    setTimeout(function () { box.innerHTML = ""; }, 1800);
-  }
-
-  canvas.addEventListener("pointerdown", function (e) {
-    if (revealed) return;
-    drawing = true;
-    canvas.setPointerCapture(e.pointerId);
-    lastPt = point(e);
-    scratchTo(lastPt);
-  });
-  canvas.addEventListener("pointermove", function (e) {
-    if (!drawing) return;
-    scratchTo(point(e));
-    if (++moves % 12 === 0 && clearedShare() > .55) reveal();
-  });
-  ["pointerup", "pointercancel"].forEach(function (ev) {
-    canvas.addEventListener(ev, function () {
-      if (!drawing) return;
-      drawing = false;
-      if (clearedShare() > .45) reveal();
-    });
-  });
-  canvas.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") reveal(); });
-  canvas.tabIndex = 0;
-
-  var resizeTimer;
-  window.addEventListener("resize", function () {
-    if (revealed) return;
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(paintFoil, 200);
-  });
-
-  /* ---------------- falling petals ---------------- */
-
-  function startPetals() {
-    if (reduceMotion) return;
-    var box = $("petals");
-    var colours = ["#FBF4E8", "#FFFFFF", "#F3E3D3", "#EAD7B5", "#D9C7A2", "#F6E7DA"];
-    var count = window.innerWidth < 700 ? 14 : 24;
-    for (var i = 0; i < count; i++) {
-      var p = document.createElement("span");
-      p.className = "petal";
-      p.style.left = Math.random() * 100 + "%";
-      p.style.setProperty("--s", 8 + Math.random() * 10 + "px");
-      p.style.setProperty("--c", colours[i % colours.length]);
-      p.style.setProperty("--d", 10 + Math.random() * 10 + "s");
-      p.style.setProperty("--delay", -Math.random() * 18 + "s");
-      p.style.setProperty("--x", (Math.random() * 160 - 60) + "px");
-      p.style.setProperty("--r", (Math.random() * 360 + 120) + "deg");
-      box.appendChild(p);
-    }
-  }
 
   /* ---------------- music ---------------- */
 
   var audio = $("music"), musicBtn = $("musicBtn");
   if (W.music) {
     audio.src = W.music;
-    musicBtn.hidden = false;
+    audio.volume = W.musicVolume == null ? .35 : W.musicVolume;
     musicBtn.addEventListener("click", function () {
-      if (audio.paused) { audio.play().catch(function () {}); } else { audio.pause(); }
+      if (audio.paused) audio.play().catch(function () {}); else audio.pause();
     });
-    audio.addEventListener("play", function () { musicBtn.setAttribute("aria-pressed", "true"); });
-    audio.addEventListener("pause", function () { musicBtn.setAttribute("aria-pressed", "false"); });
+    audio.addEventListener("play", function () { musicBtn.setAttribute("aria-pressed", "true"); updateMusicLabel(); });
+    audio.addEventListener("pause", function () { musicBtn.setAttribute("aria-pressed", "false"); updateMusicLabel(); });
   }
 
-  /* ---------------- envelope → gate → page ---------------- */
+  function updateMusicLabel() {
+    musicBtn.setAttribute("aria-label", audio.paused ? t("musicOn") : t("musicOff"));
+  }
 
-  var envelope = $("envelope"), gate = $("gate"), body = document.body, opened = false;
+  function startMusic() {
+    if (!W.music) return;
+    musicBtn.hidden = false;
+    audio.volume = W.musicVolume == null ? .35 : W.musicVolume;
+    audio.play().catch(function () { /* browser blocked autoplay; the button still works */ });
+  }
 
-  function finishOpen() {
+  /* ---------------- envelope → Bismillah → ayah → page ---------------- */
+
+  var envelope = $("envelope"), intro = $("intro"), body = document.body;
+  var opened = false, timers = [], stepIndex = -1;
+
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+
+  function finish() {
+    clearTimers();
+    envelope.hidden = true;
+    intro.classList.add("is-gone");
     body.classList.remove("is-sealed");
-    gate.classList.add("is-gone");
     window.scrollTo(0, 0);
-    paintFoil();
-    startPetals();
+    setTimeout(function () { intro.hidden = true; }, 1300);
     $("page").focus({ preventScroll: true });
   }
 
-  function open(instant) {
+  // intro: the ayah, then our names, then the date — then the invitation
+  var steps = [
+    function () { $("stepAyah").classList.add("is-show"); later(next, 8000); },
+    function () { $("stepAyah").classList.remove("is-show"); later(finish, 1100); }
+  ];
+
+  function next() {
+    clearTimers();
+    stepIndex++;
+    if (stepIndex < steps.length) steps[stepIndex]();
+    else finish();
+  }
+
+  intro.addEventListener("click", function () { if (opened) next(); });
+
+  function open(skipAll) {
     if (opened) return;
     opened = true;
-    if (W.music) audio.play().catch(function () {});
-    if (instant || reduceMotion) {
-      envelope.hidden = true;
-      gate.hidden = true;
-      finishOpen();
-      return;
-    }
+    startMusic();
+    if (skipAll || reduceMotion) { finish(); return; }
     envelope.classList.add("is-opening");
-    setTimeout(function () { envelope.classList.add("is-flap-open"); }, 600);
-    setTimeout(function () { envelope.classList.add("is-leaving"); }, 1700);
-    setTimeout(function () { gate.classList.add("is-open"); }, 2600);
-    setTimeout(finishOpen, 3900);
-    setTimeout(function () { envelope.hidden = true; gate.hidden = true; }, 5200);
+    later(function () { envelope.classList.add("is-open"); }, 450);
+    later(next, 1300);                                   // the ayah fades in as the doors part
+    setTimeout(function () { envelope.hidden = true; }, 2600); // not cleared when the intro advances
   }
 
   $("seal").addEventListener("click", function () { open(false); });
   $("skipBtn").addEventListener("click", function () { open(true); });
-  if (params.get("open") === "1") open(true);
+  if (params.get("open") === "1") { opened = true; finish(); }
 
   /* ---------------- RSVP ---------------- */
 
@@ -384,7 +388,7 @@
   }
 
   var prev = store("get", "rsvp-sent");
-  if (prev) { try { var p = JSON.parse(prev); showDone(p.name, p.attending, true); } catch (e) { /* ignore */ } }
+  if (prev) { try { var pr = JSON.parse(prev); showDone(pr.name, pr.attending, true); } catch (e) { /* ignore */ } }
 
   $("rsvpAgain").addEventListener("click", function () {
     $("rsvpDone").hidden = true;
@@ -431,4 +435,7 @@
   /* ---------------- go ---------------- */
 
   applyLang();
+  if (tick(true)) {
+    var cdTimer = setInterval(function () { if (!tick()) clearInterval(cdTimer); }, 1000);
+  }
 })();

@@ -1,15 +1,16 @@
-# Nasif & Esmat — wedding invitation
+# Esmat & Nasif — wedding invitation
 
-An embossed ivory envelope with a glowing wax seal. Tap it and the flap opens, palace gates swing open, and the card appears: a mosque at sunset inside an arch, lanterns, birds and falling petals. Below that are two Quran verses, the formal invitation, a countdown, a scratch-to-reveal date, the timeline, the venue map, attire and an RSVP form that saves to Google Sheets. Every page works in English and বাংলা.
+An ivory satin envelope with pearls and a glowing seal. Tap the seal and the two halves open like doors. Then the Bismillah (Arabic + English/Bangla) fades in and out, then Surah An-Naba 78:8, and then the invitation. Below it: countdown (navy band), save the date with Add to Calendar, timeline (navy band), venue map, attire, RSVP, contacts and the closing. Soft flute music plays on loop after the seal is tapped. Every page works in English and বাংলা.
 
 ## Files
 
 | File | What it is | Edit it? |
 |---|---|---|
-| `config.js` | Every word, time, colour and link, in English **and** Bangla | **Yes — the only file you normally edit** |
+| `config.js` | Every word, time, phone number, colour and link, in English **and** Bangla | **Yes — the only file you normally edit** |
 | `index.html` | Page structure and all the drawings | No |
-| `style.css` | Colours, fonts, animation | Only to change the look |
-| `app.js` | Envelope, countdown, scratch card, language switch, RSVP | No |
+| `style.css` | Colours, fonts, animation. The navy band colour is `--band` near the top | Only to change the look |
+| `app.js` | Envelope, intro, countdown, calendar, language switch, RSVP | No |
+| `music.mp3` | 0:00–1:02 of the flute instrumental, with soft fades so the loop is smooth | Replace to change the music |
 | `google-apps-script/Code.gs` | The RSVP receiver you paste into Google Sheets | Paste once |
 | `og-image.jpg` | Picture shown when the link is shared on WhatsApp | Optional |
 
@@ -17,17 +18,11 @@ An embossed ivory envelope with a glowing wax seal. Tap it and the flap opens, p
 
 Double-click `index.html`. Handy additions to the address:
 
-- `?open=1` skips the envelope (useful while editing)
+- `?open=1` skips the envelope and intro (useful while editing)
 - `?lang=bn` opens in Bangla
 - `?to=Rahman%20Family` shows a guest's personal envelope
 
-## Things to fill in (`config.js`)
-
-- **Parents' names** — `groomParents` / `brideParents` (English and Bangla). Empty = hidden.
-- **Venue address line** — `venueAddress` (currently just "Dhaka, Bangladesh").
-- **Timeline after lunch** — 3:30 pm "Photos & dessert" and 4:30 pm "Farewell & duas" are suggestions. Change or delete them.
-- **RSVP deadline** — `rsvpDeadline` (currently 20 November 2026).
-- **Music (optional)** — put an `.mp3` in this folder and write its name in `music`, e.g. `music: "music.mp3"`. A speaker button then appears and the music starts when the seal is tapped.
+Music volume: `musicVolume` in `config.js` (0.35 now; 0 = silent, 1 = full). Browsers only allow music after a tap, so it starts when the seal is tapped.
 
 ## Connect the RSVP to Google Sheets (about 10 minutes)
 

@@ -7,48 +7,67 @@
 window.WEDDING = {
   defaultLanguage: "en", // "en" or "bn"
 
-  // The moment the countdown counts to (Bangladesh time, +06:00)
+  // Countdown target and calendar event (Bangladesh time, +06:00)
   countdownTo: "2026-12-05T14:00:00+06:00",
-  weddingDate: "2026-12-05",
+  calendar: {
+    start: "2026-12-05T13:30:00+06:00",
+    end: "2026-12-05T17:00:00+06:00",
+    title: "Nikkah of Esmat & Nasif",
+    location: "Pepper Tree BD, Dhaka",
+  },
 
-  monogram: "N&E", // letters on the wax seal
+  monogram: "E&N", // letters on the pearl seal
 
-  // ---- Venue -------------------------------------------------
+  // Background music: plays softly after the seal is tapped, on loop.
+  music: "music.mp3",
+  musicVolume: 0.35, // 0 = silent, 1 = full
+
   venue: {
     lat: 23.8023502,
     lng: 90.4633476,
     mapLink: "https://maps.app.goo.gl/iQbd32KJibN1igYf7",
   },
 
-  // ---- Timeline (in order) ------------------------------------
-  // icon can be: guests, rings, dining, camera, farewell
+  // icon can be: guests, nikah, dining, dua
   timeline: [
-    { icon: "guests",   time: { en: "1:30 pm", bn: "দুপুর ১:৩০" }, title: { en: "Arrival of guests",  bn: "অতিথিদের আগমন" } },
-    { icon: "rings",    time: { en: "2:00 pm", bn: "দুপুর ২:০০" }, title: { en: "Nikah ceremony",     bn: "আকদ (নিকাহ)" } },
-    { icon: "dining",   time: { en: "2:30 pm", bn: "দুপুর ২:৩০" }, title: { en: "Lunch",              bn: "দুপুরের খাবার" } },
-    { icon: "camera",   time: { en: "3:30 pm", bn: "বিকেল ৩:৩০" }, title: { en: "Photos & dessert",   bn: "ফটোসেশন ও মিষ্টিমুখ" } },
-    { icon: "farewell", time: { en: "4:30 pm", bn: "বিকেল ৪:৩০" }, title: { en: "Farewell & duas",    bn: "বিদায় ও দোয়া" } },
+    { icon: "guests", time: { en: "1:30 pm", bn: "দুপুর ১:৩০" }, title: { en: "Arrival of guests", bn: "অতিথিদের আগমন" } },
+    { icon: "nikah",  time: { en: "2:00 pm", bn: "দুপুর ২:০০" }, title: { en: "Nikkah ceremony",   bn: "আকদ (নিকাহ)" } },
+    { icon: "dining", time: { en: "2:30 pm", bn: "দুপুর ২:৩০" }, title: { en: "Lunch",             bn: "দুপুরের খাবার" } },
+    { icon: "dua",    time: { en: "4:30 pm", bn: "বিকেল ৪:৩০" }, title: { en: "Duas & farewell",   bn: "দোয়া ও বিদায়" } },
   ],
 
-  // Attire colour swatches (hex colours)
-  attireColours: ["#F3EBDD", "#DCC7A6", "#E9CDC3", "#C3CCB4", "#C9A35E"],
+  // Attire colour dots
+  attireColours: [
+    { name: "Ivory",        hex: "#FBF6E9" },
+    { name: "Beige",        hex: "#E6D5B8" },
+    { name: "Blush pink",   hex: "#F2C6C2" },
+    { name: "Sage green",   hex: "#B7C6A8" },
+    { name: "Powder blue",  hex: "#BCD3E6" },
+    { name: "Lavender",     hex: "#D5C9E8" },
+    { name: "Butter yellow",hex: "#F5E6A6" },
+    { name: "Light gold",   hex: "#DCC38A" },
+  ],
+
+  // Phone numbers: Bangladesh numbers as written locally
+  contacts: {
+    bride: [
+      { name: { en: "Mohammad Enamul Haque Khan", bn: "মোহাম্মদ এনামুল হক খান" }, phone: "01711617527" },
+      { name: { en: "Salman Khan Shihan",         bn: "সালমান খান শিহান" },       phone: "01777679713" },
+    ],
+    groom: [
+      { name: { en: "Mehedi Al Redoy",  bn: "মেহেদী আল রেদয়" },  phone: "01706544002" },
+      { name: { en: "Mahfuzur Rahman",  bn: "মাহফুজুর রহমান" }, phone: "01521572275" },
+    ],
+  },
 
   // ---- RSVP --------------------------------------------------
   // Paste your Google Apps Script web-app URL here (README, step 2).
   rsvpEndpoint: "",
-  rsvpDeadline: "2026-11-20",
   maxGuestsPerInvite: 6,
 
-  // ---- Music (optional) ---------------------------------------
-  // Put an .mp3 file in this folder and write its name, e.g. "music.mp3".
-  // Leave "" for no music (the speaker button is then hidden).
-  music: "",
+  bismillah: "بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+  ayah: "وَخَلَقْنَاكُمْ أَزْوَاجًا",
 
-  // ---- The two Quran verses ------------------------------------
-  ayahLong: "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
-  ayahShort: "وَخَلَقْنَاكُمْ أَزْوَاجًا",
-
-  // ---- All text, in both languages -----------------------------
   text: {
     en: {
       langSwitch: "বাংলা",
@@ -56,33 +75,31 @@ window.WEDDING = {
       tapToOpen: "Tap the seal to open",
       forGuest: "For",
       guestDefault: "our dear guest",
+      tapToContinue: "Tap to continue",
 
-      heroInvite: "You are invited to the wedding of",
-      groomShort: "Nasif",
+      bismillahTrans: "In the name of Allah, the Most Gracious, the Most Merciful",
+      ayahTrans: "And We created you in pairs",
+      ayahRef: "Surah An-Naba (78:8)",
+
+      inviteLine1: "With the Blessing of Allah,",
+      inviteLine2: "we cordially invite you to the Nikkah Ceremony of",
       brideShort: "Esmat",
-      groomFull: "Nasif Sarwar",
+      groomShort: "Nasif",
       brideFull: "Esmat Jahan Khan Bristi",
+      brideParents: "(D/O. Mohammad Enamul Haque Khan & Saleha Begum)",
       and: "&",
+      groomFull: "Md. Nasif Sarwar",
+      groomParents: "(S/O. Md. Shahidul Islam & Nasima Akter)",
       scroll: "Scroll down",
 
-      ayahLongTrans: "And of His signs is that He created for you, from yourselves, spouses so that you may find tranquillity in them; and He placed between you affection and mercy.",
-      ayahLongRef: "Surah Ar-Rum (30:21)",
-      ayahShortTrans: "And We created you in pairs",
-      ayahShortRef: "Surah An-Naba (78:8)",
-
-      cardIntro: "With the blessings of Allah and our families",
-      groomParents: "", // e.g. "Son of Mr. ... & Mrs. ..."  ("" hides it)
-      with: "with",
-      brideParents: "", // e.g. "Daughter of Mr. ... & Mrs. ..."
-      dearHeading: "Dear friends and family",
-      inviteBody: "With joy in our hearts, we invite you to witness our Nikah and the beginning of our forever. Your presence and duas would mean the world to us.",
-
-      countdownHeading: "Counting down to our Nikah",
+      countdownHeading: "Countdown to our wedding",
       days: "Days", hours: "Hours", minutes: "Minutes", seconds: "Seconds",
       countdownDone: "Alhamdulillah, the day is here",
 
-      dateHeading: "The wedding date",
-      scratchHint: "Scratch the heart to reveal",
+      saveHeading: "Save the date",
+      saveDate: "5th December 2026",
+      addCalendar: "Add to Calendar",
+      otherCalendar: "Apple / Outlook calendar (.ics)",
 
       timelineHeading: "Wedding timeline",
 
@@ -92,10 +109,10 @@ window.WEDDING = {
       viewMap: "Open in Google Maps",
 
       attireHeading: "Attire",
-      attireBody: "Traditional or formal wear. We would love to see soft ivory, beige, blush, sage or gold.",
+      attireBody: "We would love for you to celebrate with us in soft, light or pastel colours. Traditional and formal wear are both welcome.",
 
       rsvpHeading: "RSVP",
-      rsvpSub: "Kindly reply by {date}",
+      rsvpSub: "Kindly let us know if you can join us",
       fName: "Your name",
       fPhone: "Phone",
       optional: "(optional)",
@@ -116,9 +133,16 @@ window.WEDDING = {
       errNet: "Your RSVP didn't send. Check your internet connection and try again.",
       notConnected: "RSVP isn't connected yet. Add your Google Apps Script link to rsvpEndpoint in config.js.",
 
+      contactsHeading: "For any queries",
+      brideSide: "Bride's side",
+      groomSide: "Groom's side",
+      call: "Call",
+
       blessing: "Jazakallahu khairan. May Allah bless this union.",
       credit: "Designed and coded by the bride and groom.",
       joke: "We had to use our software engineering degrees somewhere.",
+      musicOn: "Play music",
+      musicOff: "Mute music",
     },
 
     bn: {
@@ -127,33 +151,31 @@ window.WEDDING = {
       tapToOpen: "খুলতে সিলে চাপুন",
       forGuest: "প্রিয়",
       guestDefault: "অতিথি",
+      tapToContinue: "চালিয়ে যেতে চাপুন",
 
-      heroInvite: "শুভ বিবাহের নিমন্ত্রণ",
-      groomShort: "নাসিফ",
+      bismillahTrans: "পরম করুণাময়, অসীম দয়ালু আল্লাহর নামে",
+      ayahTrans: "আর আমি তোমাদের সৃষ্টি করেছি জোড়ায় জোড়ায়",
+      ayahRef: "সূরা আন-নাবা (৭৮:৮)",
+
+      inviteLine1: "মহান আল্লাহর রহমতে,",
+      inviteLine2: "আমাদের শুভ আকদ অনুষ্ঠানে আপনাকে সাদর আমন্ত্রণ জানাচ্ছি",
       brideShort: "ইসমাত",
-      groomFull: "নাসিফ সারওয়ার",
+      groomShort: "নাসিফ",
       brideFull: "ইসমাত জাহান খান বৃষ্টি",
+      brideParents: "(মোহাম্মদ এনামুল হক খান ও সালেহা বেগমের কন্যা)",
       and: "ও",
+      groomFull: "মোঃ নাসিফ সারওয়ার",
+      groomParents: "(মোঃ শহিদুল ইসলাম ও নাসিমা আক্তারের পুত্র)",
       scroll: "নিচে স্ক্রল করুন",
 
-      ayahLongTrans: "আর তাঁর নিদর্শনাবলির মধ্যে একটি হলো, তিনি তোমাদের জন্য তোমাদের মধ্য থেকেই জীবনসঙ্গী সৃষ্টি করেছেন, যাতে তোমরা তাদের কাছে প্রশান্তি পাও; এবং তিনি তোমাদের মধ্যে ভালোবাসা ও দয়া সৃষ্টি করেছেন।",
-      ayahLongRef: "সূরা আর-রূম (৩০:২১)",
-      ayahShortTrans: "আর আমি তোমাদের সৃষ্টি করেছি জোড়ায় জোড়ায়",
-      ayahShortRef: "সূরা আন-নাবা (৭৮:৮)",
-
-      cardIntro: "মহান আল্লাহর রহমত ও পরিবারের দোয়ায়",
-      groomParents: "",
-      with: "এবং",
-      brideParents: "",
-      dearHeading: "প্রিয় আত্মীয় ও বন্ধুরা",
-      inviteBody: "আনন্দভরা হৃদয়ে আমাদের নিকাহ অনুষ্ঠানে আপনাকে সাদর আমন্ত্রণ জানাচ্ছি। আপনার উপস্থিতি ও দোয়া আমাদের কাছে অনেক মূল্যবান।",
-
-      countdownHeading: "নিকাহর আর বাকি",
+      countdownHeading: "আমাদের বিয়ের ক্ষণগণনা",
       days: "দিন", hours: "ঘণ্টা", minutes: "মিনিট", seconds: "সেকেন্ড",
       countdownDone: "আলহামদুলিল্লাহ, আজই সেই দিন",
 
-      dateHeading: "বিয়ের তারিখ",
-      scratchHint: "তারিখ দেখতে হৃদয়টি ঘষুন",
+      saveHeading: "তারিখটি মনে রাখবেন",
+      saveDate: "৫ ডিসেম্বর ২০২৬",
+      addCalendar: "ক্যালেন্ডারে যোগ করুন",
+      otherCalendar: "Apple / Outlook ক্যালেন্ডার (.ics)",
 
       timelineHeading: "অনুষ্ঠানসূচি",
 
@@ -163,10 +185,10 @@ window.WEDDING = {
       viewMap: "গুগল ম্যাপে দেখুন",
 
       attireHeading: "পোশাক",
-      attireBody: "ঐতিহ্যবাহী বা ফরমাল পোশাক। হালকা আইভরি, বেইজ, গোলাপি, সবুজাভ বা সোনালি রঙে আপনাকে দেখলে খুশি হব।",
+      attireBody: "হালকা বা প্যাস্টেল রঙের পোশাকে আমাদের সাথে উদযাপন করলে খুশি হব। ঐতিহ্যবাহী ও ফরমাল দুই ধরনের পোশাকই স্বাগত।",
 
       rsvpHeading: "উপস্থিতি নিশ্চিত করুন",
-      rsvpSub: "অনুগ্রহ করে {date}-এর মধ্যে জানান",
+      rsvpSub: "আপনি আসতে পারবেন কি না, অনুগ্রহ করে জানান",
       fName: "আপনার নাম",
       fPhone: "ফোন",
       optional: "(ঐচ্ছিক)",
@@ -187,9 +209,16 @@ window.WEDDING = {
       errNet: "পাঠানো যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।",
       notConnected: "RSVP এখনো যুক্ত হয়নি। config.js-এ rsvpEndpoint-এ Google Apps Script লিংক দিন।",
 
+      contactsHeading: "যেকোনো প্রয়োজনে যোগাযোগ",
+      brideSide: "কনে পক্ষ",
+      groomSide: "বর পক্ষ",
+      call: "কল",
+
       blessing: "জাযাকাল্লাহু খাইরান। আল্লাহ এই বন্ধনে বরকত দিন।",
       credit: "এই ওয়েবসাইটটি বর ও কনে নিজেরাই ডিজাইন ও কোড করেছে।",
       joke: "সফটওয়্যার ইঞ্জিনিয়ারিং ডিগ্রিটা কোথাও তো কাজে লাগাতে হবে!",
+      musicOn: "মিউজিক চালু করুন",
+      musicOff: "মিউজিক বন্ধ করুন",
     },
   },
 };
