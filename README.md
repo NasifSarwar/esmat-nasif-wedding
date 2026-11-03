@@ -38,21 +38,21 @@ If you edit `Code.gs` later: **Deploy → Manage deployments → ✎ → Version
 ## Put it online (GitHub Pages, free)
 
 ```bash
-cd ~/Documents/Essif-Evite
+cd ~/Documents/Essif-Evite   # your local folder
 git add .
 git commit -m "Wedding invitation"
 git push -u origin main
 ```
 
-Then on GitHub: **Settings → Pages → Deploy from a branch → main → / (root) → Save**. After 1–2 minutes the site is live at **https://nasifsarwar.github.io/Essif-Evite/**
+Then on GitHub: **Settings → Pages → Deploy from a branch → main → / (root) → Save**. After 1–2 minutes the site is live at **https://nasifsarwar.github.io/esmat-nasif-wedding/**
 
 Free GitHub Pages needs a **public** repository, so anyone with the link can see the names, date and venue. RSVP answers stay private in your Google Sheet.
 
 ## Personal links for guests
 
 ```
-https://nasifsarwar.github.io/Essif-Evite/?to=Rahman%20Family
-https://nasifsarwar.github.io/Essif-Evite/?to=Tanvir&lang=bn
+https://nasifsarwar.github.io/esmat-nasif-wedding/?to=Rahman%20Family
+https://nasifsarwar.github.io/esmat-nasif-wedding/?to=Tanvir&lang=bn
 ```
 
 The **Invite link name** column in the sheet shows which link each reply came from.
