@@ -16,7 +16,7 @@ window.WEDDING = {
     location: "Pepper Tree BD, Dhaka",
   },
 
-  monogram: "E&N", // letters on the pearl seal
+  monogram: "NE", // letters on the pearl seal
 
   // Background music: plays softly after the seal is tapped, on loop.
   music: "music.mp3",
@@ -62,7 +62,7 @@ window.WEDDING = {
 
   // ---- RSVP --------------------------------------------------
   // Paste your Google Apps Script web-app URL here (README, step 2).
-  rsvpEndpoint: "",
+  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbwEXSyZBNtZgePu2evezjPPL9Vl_wN6huZf78OXiC-QHZWrU1fdzNUXMrSYwS_8MsVo/exec",
   maxGuestsPerInvite: 6,
 
   bismillah: "بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
@@ -124,8 +124,8 @@ window.WEDDING = {
       fMessage: "A message or dua for us",
       send: "Send RSVP",
       sending: "Sending…",
-      doneYes: "Thank you, {name}! See you there, insha'Allah.",
-      doneYesText: "We've received your RSVP. If your plans change, you can update it here.",
+      doneYes: "Thank you, {name}! See you there, In Sha Allah.",
+      doneYesText: "We've received your RSVP.",
       doneNo: "Thank you for letting us know, {name}.",
       doneNoText: "We'll miss you. Please keep us in your duas.",
       change: "Change my answer",
@@ -203,7 +203,7 @@ window.WEDDING = {
       send: "পাঠান",
       sending: "পাঠানো হচ্ছে…",
       doneYes: "ধন্যবাদ, {name}! দেখা হবে ইনশাআল্লাহ।",
-      doneYesText: "আপনার উত্তর আমরা পেয়েছি। পরিকল্পনা বদলালে এখান থেকেই আপডেট করতে পারবেন।",
+      doneYesText: "আপনার উত্তর আমরা পেয়েছি।",
       doneNo: "জানানোর জন্য ধন্যবাদ, {name}।",
       doneNoText: "আপনাকে মিস করব। দোয়ায় রাখবেন।",
       change: "উত্তর বদলান",

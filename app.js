@@ -54,7 +54,6 @@
     renderContacts();
     setMap();
     tick(true);
-    $("guestsOut").textContent = num(guests);
     if (!$("rsvpDone").hidden && lastReply) showDone(lastReply.name, lastReply.attending, true);
     updateMusicLabel();
     setTimeout(layoutPearls, 50);
@@ -91,7 +90,7 @@
 
   $("bismillahText").textContent = W.bismillah || "";
   $("ayahText").textContent = W.ayah || "";
-  $("monogram").textContent = W.monogram || "E&N";
+  if ($("monogram")) $("monogram").textContent = W.monogram || "NE";
 
   (W.attireColours || []).forEach(function (c) {
     var li = document.createElement("li");
@@ -375,7 +374,7 @@
 
   // intro: the ayah, then our names, then the date — then the invitation
   var steps = [
-    function () { $("stepAyah").classList.add("is-show"); later(next, 8000); },
+    function () { $("stepAyah").classList.add("is-show"); later(next, 5500); },
     function () { $("stepAyah").classList.remove("is-show"); later(finish, 1100); }
   ];
 
@@ -406,29 +405,16 @@
   /* ---------------- RSVP ---------------- */
 
   var form = $("rsvpForm");
-  var maxGuests = W.maxGuestsPerInvite || 6, guests = 1, lastReply = null;
-  var stepBtns = form.querySelectorAll("[data-step]");
+  var lastReply = null;
 
   if (guest) $("rsvpName").value = guest;
-
-  function setGuests(n) {
-    guests = Math.max(1, Math.min(maxGuests, n));
-    $("guestsOut").textContent = num(guests);
-    stepBtns[0].disabled = guests <= 1;
-    stepBtns[1].disabled = guests >= maxGuests;
-  }
-  stepBtns.forEach(function (b) { b.addEventListener("click", function () { setGuests(guests + Number(b.dataset.step)); }); });
-  setGuests(1);
-
-  form.querySelectorAll('input[name="attending"]').forEach(function (r) {
-    r.addEventListener("change", function () { $("guestsField").hidden = r.value !== "Yes"; });
-  });
 
   function showDone(name, attending, quiet) {
     lastReply = { name: name, attending: attending };
     form.hidden = true;
     var done = $("rsvpDone");
     done.hidden = false;
+    $("rsvpSub").hidden = true;
     var first = (name || "").split(" ")[0];
     $("doneTitle").textContent = t(attending === "Yes" ? "doneYes" : "doneNo", { name: first });
     $("doneText").textContent = t(attending === "Yes" ? "doneYesText" : "doneNoText");
@@ -438,12 +424,6 @@
 
   var prev = store("get", "rsvp-sent");
   if (prev) { try { var pr = JSON.parse(prev); showDone(pr.name, pr.attending, true); } catch (e) { /* ignore */ } }
-
-  $("rsvpAgain").addEventListener("click", function () {
-    $("rsvpDone").hidden = true;
-    form.hidden = false;
-    $("rsvpName").focus();
-  });
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -461,7 +441,6 @@
       name: name,
       phone: (data.get("phone") || "").trim(),
       attending: attending,
-      guests: attending === "Yes" ? String(guests) : "0",
       message: (data.get("message") || "").trim(),
       invitedAs: guest,
       language: lang

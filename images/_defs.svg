@@ -1,0 +1,241 @@
+    <!-- ===== natural flowers & foliage ===== -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0.8" dy="1.6" stdDeviation="1.6" flood-color="#5A4A30" flood-opacity=".28" />
+    </filter>
+    <radialGradient id="petalShade" cx=".5" cy="1" r="1.05">
+      <stop offset="0" stop-color="#E2CFA6" />
+      <stop offset=".22" stop-color="#F6EEDD" />
+      <stop offset=".55" stop-color="#FFFEFB" />
+      <stop offset=".85" stop-color="#FBF7F0" />
+      <stop offset="1" stop-color="#E7DDCC" />
+    </radialGradient>
+    <radialGradient id="petalShade2" cx=".5" cy="1" r="1.05">
+      <stop offset="0" stop-color="#D9C39A" />
+      <stop offset=".25" stop-color="#F1E7D4" />
+      <stop offset=".6" stop-color="#FBF7EE" />
+      <stop offset="1" stop-color="#E2D6C2" />
+    </radialGradient>
+    <radialGradient id="centerShade" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#B08A3E" stop-opacity=".55" />
+      <stop offset=".6" stop-color="#C9A55E" stop-opacity=".25" />
+      <stop offset="1" stop-color="#C9A55E" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="pistil" cx=".4" cy=".35" r=".7">
+      <stop offset="0" stop-color="#EBDD9C" /><stop offset=".6" stop-color="#B9A04E" /><stop offset="1" stop-color="#7E6A2C" />
+    </radialGradient>
+    <radialGradient id="berry" cx=".35" cy=".3" r=".75">
+      <stop offset="0" stop-color="#FBEBC0" /><stop offset=".45" stop-color="#D9B46A" /><stop offset="1" stop-color="#94702E" />
+    </radialGradient>
+    <linearGradient id="leafDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4A5E43" /><stop offset=".55" stop-color="#647A59" /><stop offset="1" stop-color="#859A77" />
+    </linearGradient>
+    <linearGradient id="leafMid" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5C7051" /><stop offset=".55" stop-color="#7C9070" /><stop offset="1" stop-color="#A2B396" />
+    </linearGradient>
+    <linearGradient id="leafSheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".22" /><stop offset="1" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- one natural petal, base at 0,0 pointing up -->
+    <symbol id="petal" viewBox="-24 -50 48 52" overflow="visible">
+      <path d="M0 0 C-11 -5 -21.5 -18 -20 -31 C-18.5 -41 -11 -47 -3 -46.5 C1 -47.6 4 -46.6 6.5 -45.8 C13.5 -43.5 19.5 -38 20 -29 C20.5 -17 11 -5 0 0 Z" fill="url(#petalShade)" />
+      <g fill="none" stroke="#CDB894" stroke-linecap="round" opacity=".26">
+        <path d="M0 -3 C-.4 -14 -.3 -26 0 -38" stroke-width=".55" />
+        <path d="M-1 -6 C-5 -14 -8 -24 -9 -34" stroke-width=".4" />
+        <path d="M1 -6 C5 -14 8 -24 9 -34" stroke-width=".4" />
+        <path d="M-1.5 -8 C-8 -15 -12 -22 -14 -28" stroke-width=".35" />
+        <path d="M1.5 -8 C8 -15 12 -22 14 -28" stroke-width=".35" />
+      </g>
+      <path d="M-13 -36 C-9 -43 -3 -44 -1.5 -42" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity=".35" />
+    </symbol>
+    <symbol id="flower" viewBox="-50 -50 100 100" overflow="visible">
+      <g filter="url(#softShadow)">
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="rotate(0) scale(1.0)" />
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="rotate(73) scale(0.97)" />
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="rotate(143) scale(1.03)" />
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="rotate(214) scale(0.98)" />
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="rotate(287) scale(1.02)" />
+      </g>
+      <circle r="15" fill="url(#centerShade)" />
+      <g stroke="#B79646" stroke-width=".55" stroke-linecap="round">
+        <path d="M0 0 L10.4 -0.7" />
+        <path d="M0 0 L10.4 2.7" />
+        <path d="M0 0 L6.8 4.7" />
+        <path d="M0 0 L8.7 7.9" />
+        <path d="M0 0 L4.2 8.0" />
+        <path d="M0 0 L0.2 10.1" />
+        <path d="M0 0 L-2.2 9.9" />
+        <path d="M0 0 L-3.9 7.8" />
+        <path d="M0 0 L-8.1 8.7" />
+        <path d="M0 0 L-9.6 6.1" />
+        <path d="M0 0 L-8.0 2.0" />
+        <path d="M0 0 L-10.6 -0.7" />
+        <path d="M0 0 L-7.9 -1.9" />
+        <path d="M0 0 L-8.0 -6.2" />
+        <path d="M0 0 L-7.3 -9.4" />
+        <path d="M0 0 L-4.5 -11.3" />
+        <path d="M0 0 L-1.9 -11.4" />
+        <path d="M0 0 L1.6 -12.1" />
+        <path d="M0 0 L4.2 -7.3" />
+        <path d="M0 0 L5.3 -7.3" />
+        <path d="M0 0 L8.9 -4.4" />
+        <path d="M0 0 L9.1 -2.4" />
+      </g>
+      <g fill="url(#berry)">
+        <circle cx="10.4" cy="-0.7" r="1.28" />
+        <circle cx="10.3" cy="3.3" r="1.13" />
+        <circle cx="10.6" cy="5.2" r="1.23" />
+        <circle cx="8.8" cy="8.9" r="1.34" />
+        <circle cx="3.5" cy="9.5" r="1.42" />
+        <circle cx="2.4" cy="10.6" r="1.53" />
+        <circle cx="-1.7" cy="11.2" r="1.44" />
+        <circle cx="-3.6" cy="10.8" r="1.40" />
+        <circle cx="-5.0" cy="6.4" r="1.53" />
+        <circle cx="-9.4" cy="6.1" r="1.54" />
+        <circle cx="-11.8" cy="2.8" r="1.30" />
+        <circle cx="-10.0" cy="-0.7" r="1.57" />
+        <circle cx="-7.8" cy="-3.1" r="1.17" />
+        <circle cx="-10.8" cy="-6.0" r="1.32" />
+        <circle cx="-5.9" cy="-7.3" r="1.35" />
+        <circle cx="-4.2" cy="-8.6" r="1.39" />
+        <circle cx="-1.5" cy="-12.0" r="1.44" />
+        <circle cx="2.9" cy="-11.5" r="1.60" />
+        <circle cx="4.0" cy="-7.8" r="1.53" />
+        <circle cx="8.9" cy="-8.2" r="1.38" />
+        <circle cx="7.8" cy="-4.4" r="1.52" />
+        <circle cx="9.0" cy="-2.5" r="1.13" />
+      </g>
+      <circle r="4.2" fill="url(#pistil)" />
+    </symbol>
+    <symbol id="blossom" viewBox="-20 -20 40 40" overflow="visible">
+      <g filter="url(#softShadow)">
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="scale(.36)" />
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="rotate(72) scale(.34)" />
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="rotate(144) scale(.37)" />
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="rotate(216) scale(.35)" />
+        <use href="#petal" x="-24" y="-50" width="48" height="52" transform="rotate(288) scale(.36)" />
+      </g>
+      <circle r="6" fill="url(#centerShade)" />
+      <g stroke="#B79646" stroke-width=".4" stroke-linecap="round">
+        <path d="M0 0 L4.9 -0.0" />
+        <path d="M0 0 L5.6 2.6" />
+        <path d="M0 0 L3.1 4.2" />
+        <path d="M0 0 L-0.4 4.2" />
+        <path d="M0 0 L-2.8 4.8" />
+        <path d="M0 0 L-4.0 2.9" />
+        <path d="M0 0 L-5.1 -0.3" />
+        <path d="M0 0 L-3.7 -2.4" />
+        <path d="M0 0 L-2.4 -3.6" />
+        <path d="M0 0 L0.0 -6.3" />
+        <path d="M0 0 L3.1 -5.1" />
+        <path d="M0 0 L5.0 -3.1" />
+      </g>
+      <g fill="url(#berry)">
+        <circle cx="4.9" cy="-0.0" r=".17" />
+        <circle cx="3.3" cy="2.3" r=".35" />
+        <circle cx="1.7" cy="3.8" r=".38" />
+        <circle cx="-0.1" cy="4.1" r=".29" />
+        <circle cx="-2.8" cy="4.3" r=".46" />
+        <circle cx="-3.8" cy="2.6" r=".16" />
+        <circle cx="-6.3" cy="-0.0" r=".40" />
+        <circle cx="-4.1" cy="-2.8" r=".47" />
+        <circle cx="-2.7" cy="-3.9" r=".44" />
+        <circle cx="0.3" cy="-5.0" r=".14" />
+        <circle cx="2.0" cy="-4.0" r=".24" />
+        <circle cx="4.1" cy="-2.0" r=".54" />
+      </g>
+      <circle r="2" fill="url(#pistil)" />
+    </symbol>
+
+    <!-- closed bud -->
+    <symbol id="bud" viewBox="-8 -22 16 26" overflow="visible">
+      <path d="M0 2 C-5 -2 -6 -11 -3 -17 C-1.5 -20 1.5 -20 3 -17 C6 -11 5 -2 0 2 Z" fill="url(#petalShade2)" filter="url(#softShadow)" />
+      <path d="M0 3 C-3 0 -5 -4 -4.5 -8 C-2 -4 -1 -1 0 3 Z M0 3 C3 0 5 -4 4.5 -8 C2 -4 1 -1 0 3 Z" fill="url(#leafMid)" />
+    </symbol>
+
+    <!-- natural leaf, base at 0,0 pointing right, length 60 -->
+    <symbol id="leafA" viewBox="0 -18 62 36" overflow="visible">
+      <path d="M0 0 C9 -12 26 -17 41 -12 C50 -9 56 -5 61 0 C55 4 49 8 40 11 C25 15 9 11 0 0 Z" fill="url(#leafDark)" filter="url(#softShadow)" />
+      <path d="M0 0 C9 -12 26 -17 41 -12 C50 -9 56 -5 61 0 C45 -2 22 -2 0 0 Z" fill="url(#leafSheen)" />
+      <path d="M1 0 C18 -1 38 -1 59 0" fill="none" stroke="#B7C5A8" stroke-width=".9" stroke-linecap="round" opacity=".6" />
+      <g fill="none" stroke="#B7C5A8" stroke-width=".45" stroke-linecap="round" opacity=".38">
+        <path d="M12 -.6 C16 -5 20 -8 24 -10" /><path d="M24 -.7 C28 -5 32 -8 37 -10" /><path d="M36 -.6 C40 -4 44 -6 48 -7" />
+        <path d="M14 .4 C18 4 22 7 26 9" /><path d="M27 .5 C31 4 35 7 39 8.5" /><path d="M39 .5 C43 3 46 5 50 6" />
+      </g>
+    </symbol>
+    <symbol id="leafB" viewBox="0 -18 62 36" overflow="visible">
+      <path d="M0 0 C10 -10 27 -14 42 -10 C51 -7 57 -4 61 0 C56 4 50 7 41 9 C26 13 10 10 0 0 Z" fill="url(#leafMid)" filter="url(#softShadow)" />
+      <path d="M0 0 C10 -10 27 -14 42 -10 C51 -7 57 -4 61 0 C45 -2 22 -2 0 0 Z" fill="url(#leafSheen)" />
+      <path d="M1 0 C18 -.8 38 -.8 59 0" fill="none" stroke="#D3DDC6" stroke-width=".8" stroke-linecap="round" opacity=".6" />
+      <g fill="none" stroke="#D3DDC6" stroke-width=".4" stroke-linecap="round" opacity=".35">
+        <path d="M12 -.5 C16 -4 20 -7 24 -8.5" /><path d="M25 -.6 C29 -4 33 -7 38 -8.5" /><path d="M38 -.5 C42 -3 45 -5 49 -6" />
+        <path d="M14 .4 C18 3.5 22 6 26 7.5" /><path d="M27 .5 C31 3.5 35 6 39 7" /><path d="M39 .5 C43 3 46 4.5 50 5" />
+      </g>
+    </symbol>
+    <symbol id="goldSprig" viewBox="0 -80 120 90" overflow="visible">
+      <g fill="none" stroke="url(#gold)" stroke-width="1.1" stroke-linecap="round">
+        <path d="M0 0 C30 -8 62 -26 110 -70" />
+        <path d="M20.2 -6.9 Q20.4 -14.2 23.5 -18.6" />
+        <path d="M31.8 -12.3 Q39.1 -11.1 43.4 -7.0" />
+        <path d="M44.0 -18.9 Q43.4 -26.9 45.8 -31.8" />
+        <path d="M56.9 -27.1 Q65.0 -26.6 70.0 -23.0" />
+        <path d="M68.4 -35.2 Q67.1 -43.1 68.8 -47.9" />
+        <path d="M80.5 -44.6 Q88.6 -44.6 93.8 -41.6" />
+        <path d="M93.4 -55.3 Q91.7 -61.3 93.0 -64.4" />
+      </g>
+      <g fill="url(#berry)" filter="url(#softShadow)">
+        <ellipse cx="23.5" cy="-18.6" rx="3.4" ry="2.4" transform="rotate(-74.4 23.5 -18.6)" />
+        <ellipse cx="43.4" cy="-7.0" rx="3.4" ry="2.4" transform="rotate(24.6 43.4 -7.0)" />
+        <ellipse cx="45.8" cy="-31.8" rx="3.4" ry="2.4" transform="rotate(-82.3 45.8 -31.8)" />
+        <ellipse cx="70.0" cy="-23.0" rx="3.4" ry="2.4" transform="rotate(17.4 70.0 -23.0)" />
+        <ellipse cx="68.8" cy="-47.9" rx="3.4" ry="2.4" transform="rotate(-88.2 68.8 -47.9)" />
+        <ellipse cx="93.8" cy="-41.6" rx="3.4" ry="2.4" transform="rotate(12.8 93.8 -41.6)" />
+        <ellipse cx="93.0" cy="-64.4" rx="3.4" ry="2.4" transform="rotate(-92.2 93.0 -64.4)" />
+        <ellipse cx="110.0" cy="-70.0" rx="3.4" ry="2.4" transform="rotate(-40.0 110.0 -70.0)" />
+      </g>
+    </symbol>
+    <!-- corner bouquet -->
+    <symbol id="cluster" viewBox="-130 -130 260 260" overflow="visible">
+      <!-- stems -->
+      <g fill="none" stroke="#6E7F5F" stroke-width="1.3" stroke-linecap="round" opacity=".85">
+        <path d="M-20 10 C10 -30 50 -70 110 -98" />
+        <path d="M-20 10 C-50 40 -80 70 -112 110" />
+      </g>
+      <!-- gold sprigs behind -->
+      <use href="#goldSprig" x="0" y="-80" width="120" height="90" transform="translate(-6 -38) rotate(-8) scale(.95)" />
+      <use href="#goldSprig" x="0" y="-80" width="120" height="90" transform="translate(-30 20) rotate(102) scale(.9)" />
+      <use href="#goldSprig" x="0" y="-80" width="120" height="90" transform="translate(10 -10) rotate(28) scale(.55)" />
+      <use href="#goldSprig" x="0" y="-80" width="120" height="90" transform="translate(-40 -10) rotate(-78) scale(.55)" />
+      <!-- leaves -->
+      <use href="#leafA" x="0" y="-18" width="62" height="36" transform="translate(30 -52) rotate(-38) scale(1.15)" />
+      <use href="#leafB" x="0" y="-18" width="62" height="36" transform="translate(66 -78) rotate(-58) scale(.9)" />
+      <use href="#leafA" x="0" y="-18" width="62" height="36" transform="translate(70 -76) rotate(-8) scale(.85)" />
+      <use href="#leafB" x="0" y="-18" width="62" height="36" transform="translate(-52 42) rotate(128) scale(1.1)" />
+      <use href="#leafA" x="0" y="-18" width="62" height="36" transform="translate(-80 74) rotate(150) scale(.9)" />
+      <use href="#leafB" x="0" y="-18" width="62" height="36" transform="translate(-78 72) rotate(96) scale(.8)" />
+      <use href="#leafA" x="0" y="-18" width="62" height="36" transform="translate(-14 4) rotate(-150) scale(1.05)" />
+      <use href="#leafB" x="0" y="-18" width="62" height="36" transform="translate(-10 0) rotate(20) scale(1.0)" />
+      <use href="#leafA" x="0" y="-18" width="62" height="36" transform="translate(-24 -6) rotate(-100) scale(.95)" />
+      <use href="#leafB" x="0" y="-18" width="62" height="36" transform="translate(-6 14) rotate(70) scale(.9)" />
+      <use href="#leafB" x="0" y="-18" width="62" height="36" transform="translate(4 -24) rotate(-70) scale(.85)" />
+      <use href="#leafA" x="0" y="-18" width="62" height="36" transform="translate(10 -30) rotate(-20) scale(.9)" />
+      <use href="#leafB" x="0" y="-18" width="62" height="36" transform="translate(-40 22) rotate(175) scale(.9)" />
+      <use href="#leafA" x="0" y="-18" width="62" height="36" transform="translate(-36 26) rotate(105) scale(.85)" />
+      <use href="#leafB" x="0" y="-18" width="62" height="36" transform="translate(40 -50) rotate(-95) scale(.7)" />
+      <use href="#leafA" x="0" y="-18" width="62" height="36" transform="translate(-66 50) rotate(60) scale(.7)" />
+      <use href="#leafB" x="0" y="-18" width="62" height="36" transform="translate(88 -90) rotate(-30) scale(.7)" />
+      <use href="#leafA" x="0" y="-18" width="62" height="36" transform="translate(-96 92) rotate(130) scale(.7)" />
+      <!-- flowers -->
+      <use href="#flower" x="-50" y="-50" width="100" height="100" transform="translate(-22 -4) rotate(12) scale(.95)" />
+      <use href="#flower" x="-50" y="-50" width="100" height="100" transform="translate(48 -62) rotate(-20) scale(.55)" />
+      <use href="#flower" x="-50" y="-50" width="100" height="100" transform="translate(-74 58) rotate(40) scale(.5)" />
+      <use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(24 12) rotate(10) scale(1.1)" />
+      <use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(-60 -36) rotate(-25) scale(.95)" />
+      <use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(88 -98) rotate(30) scale(.8)" />
+      <use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(-100 96) rotate(5) scale(.8)" />
+      <use href="#blossom" x="-20" y="-20" width="40" height="40" transform="translate(6 -50) rotate(50) scale(.75)" />
+      <use href="#bud" x="-8" y="-22" width="16" height="26" transform="translate(104 -112) rotate(55)" />
+      <use href="#bud" x="-8" y="-22" width="16" height="26" transform="translate(-118 120) rotate(-140) scale(.9)" />
+      <use href="#bud" x="-8" y="-22" width="16" height="26" transform="translate(40 26) rotate(130) scale(.8)" />
+    </symbol>
+

@@ -1420,3 +1420,57 @@ html[lang="bn"] .credit > span { white-space: nowrap; }
 /* save-the-date line: always one line, shrinks to fit */
 .save-date { white-space: nowrap; font-size: min(1.85rem, 5vw); letter-spacing: .05em; }
 html[lang="bn"] .save-date { font-size: min(clamp(1.45rem, 6.6vw, 2.1rem), 6.2vw); }
+
+/* sage-green wax seal, same green as the blocks and leaves */
+.seal__wax { fill: url(#sageWax); }
+.seal__ring { stroke: rgba(241, 227, 188, .55); }
+.seal__ring--thin { stroke: url(#gold); opacity: .95; }
+.seal { filter: drop-shadow(0 10px 14px rgba(60, 75, 50, .4)); }
+.seal__mono {
+  background: linear-gradient(110deg, #E9D7A8 10%, #FBF1D2 42%, #F1E3BC 55%, #D9C08A 75%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 1px 0 rgba(40, 50, 30, .45));
+}
+
+/* real-wax look: embossed monogram in the same wax, no gold */
+.seal { filter: drop-shadow(0 8px 10px rgba(50, 60, 40, .45)) drop-shadow(0 2px 2px rgba(50, 60, 40, .35)); }
+.seal__mono {
+  background: none;
+  -webkit-text-fill-color: #B9C9AC;
+  color: #B9C9AC;
+  font-size: clamp(1.9rem, 8.2vw, 2.4rem);
+  filter: none;
+  text-shadow:
+    -1px -1px 0 rgba(235, 243, 226, .55),
+    1px 1.5px 1px rgba(35, 45, 30, .75),
+    0 0 6px rgba(35, 45, 30, .25);
+}
+
+/* maroon wax seal with gold monogram */
+.seal { filter: drop-shadow(0 8px 10px rgba(60, 10, 15, .45)) drop-shadow(0 2px 2px rgba(60, 10, 15, .35)); }
+.seal__mono {
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background: linear-gradient(110deg, #B8893F 10%, #E9C982 40%, #FFF0C4 52%, #C9A05A 70%, #9C7334 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(1px 1.5px 0.5px rgba(40, 4, 8, .8)) drop-shadow(-0.5px -0.5px 0 rgba(255, 220, 200, .25));
+}
+
+/* realistic champagne-gold wax seal with NE monogram */
+.seal { filter: drop-shadow(0 9px 11px rgba(70, 50, 20, .42)) drop-shadow(0 2px 2px rgba(70, 50, 20, .3)); }
+.seal__art { width: 100%; height: 100%; }
+.seal__mono { display: none; }
+
+/* performance: draw each flower bouquet once and reuse it while scrolling */
+.corner-cluster, .door-cluster { will-change: transform; }
+
+/* phones: keep the bouquets on the card corners, clear of the text */
+@media (max-width: 600px) {
+  .invite-screen .corner-cluster { width: 34vw; }
+  .invite-screen .corner-cluster--tr { top: 40px; right: -44px; }
+  .invite-screen .corner-cluster--bl { bottom: 46px; left: -44px; }
+  .frame--invite { padding-top: 104px; padding-bottom: 104px; }
+}
