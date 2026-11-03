@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Esmat &amp; Nasif — You're invited</title>
   <meta name="description" content="Tap to open your wedding invitation. Saturday, 5 December 2026." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; frame-src https://maps.google.com https://www.google.com; connect-src https://script.google.com https://script.googleusercontent.com; form-action 'none'; base-uri 'none'; object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#F4EDE1" />
 
   <meta property="og:type" content="website" />
@@ -652,6 +654,7 @@
         <p class="rsvp-sub" id="rsvpSub" data-t="rsvpSub"></p>
 
         <form class="rsvp" id="rsvpForm" novalidate>
+          <div class="hp" aria-hidden="true"><label>Website <input name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
           <label class="field"><span data-t="fName"></span><input name="name" id="rsvpName" autocomplete="name" maxlength="80" /></label>
           <label class="field"><span><span data-t="fPhone"></span> <em data-t="optional"></em></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" /></label>
           <fieldset class="choice">

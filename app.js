@@ -7,7 +7,13 @@
   var $ = function (id) { return document.getElementById(id); };
   var params = new URLSearchParams(location.search);
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var guest = (params.get("to") || "").trim().slice(0, 60);
+  // Guest name from a personal link (?to=...). Only letters (any language), spaces and . ' - & are kept,
+  // so a crafted link can't inject odd characters or very long text.
+  var guest = (params.get("to") || "")
+    .replace(/[^\p{L}\p{M}\s.'&-]/gu, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 50);
   var isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
 
   function store(action, key, value) {
@@ -26,8 +32,8 @@
 
   /* ---------------- language ---------------- */
 
-  var lang = params.get("lang") || store("get", "lang") || W.defaultLanguage || "en";
-  if (!W.text || !W.text[lang]) lang = "en";
+  var LANGS = ["en", "bn"];
+  var lang = [params.get("lang"), store("get", "lang"), W.defaultLanguage].filter(function (l) { return LANGS.indexOf(l) !== -1; })[0] || "en";
 
   function t(key, vars) {
     var s = W.text[lang] && W.text[lang][key];
@@ -406,6 +412,7 @@
 
   var form = $("rsvpForm");
   var lastReply = null;
+  var formShownAt = Date.now(), lastSendAt = 0;
 
   if (guest) $("rsvpName").value = guest;
 
@@ -430,21 +437,25 @@
     var err = $("rsvpError");
     err.textContent = "";
     var data = new FormData(form);
-    var name = (data.get("name") || "").trim();
+    var name = (data.get("name") || "").trim().slice(0, 80);
     var attending = data.get("attending");
 
     if (!name) { err.textContent = t("errName"); $("rsvpName").focus(); return; }
     if (!attending) { err.textContent = t("errChoice"); return; }
     if (!W.rsvpEndpoint) { err.textContent = t("notConnected"); return; }
+    if (Date.now() - lastSendAt < 15000) return; // no rapid repeat sends
 
     var payload = new URLSearchParams({
       name: name,
-      phone: (data.get("phone") || "").trim(),
+      phone: (data.get("phone") || "").trim().slice(0, 20),
       attending: attending,
-      message: (data.get("message") || "").trim(),
+      message: (data.get("message") || "").trim().slice(0, 500),
       invitedAs: guest,
-      language: lang
+      language: lang,
+      website: data.get("website") || "",      // hidden trap field: bots fill it, people don't
+      t: String(Date.now() - formShownAt)      // how long the form was open
     });
+    lastSendAt = Date.now();
 
     var btn = $("rsvpSubmit");
     btn.disabled = true;

@@ -56,3 +56,26 @@ https://nasifsarwar.github.io/Essif-Evite/?to=Tanvir&lang=bn
 ```
 
 The **Invite link name** column in the sheet shows which link each reply came from.
+
+## Security
+
+What is protected:
+
+- **The page** only runs its own two scripts. A Content-Security-Policy (top of `index.html`) blocks any other script, plugin or form target, so injected code can't run.
+- **Personal links** (`?to=…`) only keep letters, spaces and `. ' - &`, max 50 characters. Code or odd hidden characters in a link are stripped.
+- **No secrets in the code.** The Google Apps Script URL is public by design: it can only *add* rows. Nobody can read, edit or delete your sheet through it.
+- **The RSVP receiver (`Code.gs`)**:
+  - checks every field and limits its length; anything else sent is ignored
+  - neutralises spreadsheet formulas (`=HYPERLINK(...)` etc.)
+  - hidden trap field + minimum fill time catch most spam bots
+  - rate limits: 30 RSVPs a minute in total, 3 per person per 10 minutes
+  - stops at 3,000 rows, so a flood can't fill your Drive
+  - never shows error details to visitors (see them in Apps Script → Executions)
+
+What you must keep doing:
+
+- **Keep the Google Sheet private** (Share → "Restricted"). It holds guests' phone numbers.
+- **After editing `Code.gs`**, redeploy: Deploy → Manage deployments → ✎ → Version: *New version* → Deploy.
+- If spam ever gets through, delete the rows. If it keeps coming, make a new deployment (new URL), put it in `config.js` and push.
+
+Limits (honest): this is a free static site with no login, so a determined person could still send fake-but-valid RSVPs slowly. That costs you a few junk rows, never your data.

@@ -1474,3 +1474,6 @@ html[lang="bn"] .save-date { font-size: min(clamp(1.45rem, 6.6vw, 2.1rem), 6.2vw
   .invite-screen .corner-cluster--bl { bottom: 46px; left: -44px; }
   .frame--invite { padding-top: 104px; padding-bottom: 104px; }
 }
+
+/* hidden anti-spam field (bots fill it, people never see it) */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
