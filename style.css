@@ -1477,3 +1477,7 @@ html[lang="bn"] .save-date { font-size: min(clamp(1.45rem, 6.6vw, 2.1rem), 6.2vw
 
 /* hidden anti-spam field (bots fill it, people never see it) */
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* never let the invitation card stretch into a tall strip (very tall screens, or Chrome "Desktop site" on phones) */
+.frame--invite { min-height: min(calc(100svh - 170px), 820px); }
+.invite-screen { min-height: min(100svh, 980px); }
