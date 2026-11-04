@@ -132,6 +132,10 @@ window.WEDDING = {
       errName: "Please write your name.",
       errChoice: "Please choose whether you can come.",
       errNet: "Your RSVP didn't send. Check your internet connection and try again.",
+      errPhone: "Please write a valid phone number.",
+      errBusy: "Lots of replies right now. Please wait a minute and try again.",
+      errSave: "Your RSVP couldn't be saved. Please try again, or call us.",
+      doneUpdated: "We've updated your earlier RSVP.",
       notConnected: "RSVP isn't connected yet. Add your Google Apps Script link to rsvpEndpoint in config.js.",
 
       contactsHeading: "For any inquiries",
@@ -210,6 +214,10 @@ window.WEDDING = {
       errName: "অনুগ্রহ করে আপনার নাম লিখুন।",
       errChoice: "আপনি আসছেন কি না বেছে নিন।",
       errNet: "পাঠানো যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।",
+      errPhone: "অনুগ্রহ করে একটি সঠিক ফোন নম্বর লিখুন।",
+      errBusy: "এই মুহূর্তে অনেক উত্তর আসছে। এক মিনিট পর আবার চেষ্টা করুন।",
+      errSave: "উত্তরটি সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন অথবা আমাদের কল করুন।",
+      doneUpdated: "আপনার আগের উত্তরটি আপডেট করা হয়েছে।",
       notConnected: "RSVP এখনো যুক্ত হয়নি। config.js-এ rsvpEndpoint-এ Google Apps Script লিংক দিন।",
 
       contactsHeading: "যেকোনো প্রয়োজনে যোগাযোগ",

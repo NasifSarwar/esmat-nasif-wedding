@@ -60,7 +60,7 @@
     renderContacts();
     setMap();
     tick(true);
-    if (!$("rsvpDone").hidden && lastReply) showDone(lastReply.name, lastReply.attending, true);
+    if (!$("rsvpDone").hidden && lastReply) showDone(lastReply.name, lastReply.attending, true, lastReply.updated);
     updateMusicLabel();
     setTimeout(layoutPearls, 50);
   }
@@ -416,21 +416,29 @@
 
   if (guest) $("rsvpName").value = guest;
 
-  function showDone(name, attending, quiet) {
-    lastReply = { name: name, attending: attending };
+  function showDone(name, attending, quiet, updated) {
+    lastReply = { name: name, attending: attending, updated: updated };
     form.hidden = true;
     var done = $("rsvpDone");
     done.hidden = false;
     $("rsvpSub").hidden = true;
     var first = (name || "").split(" ")[0];
     $("doneTitle").textContent = t(attending === "Yes" ? "doneYes" : "doneNo", { name: first });
-    $("doneText").textContent = t(attending === "Yes" ? "doneYesText" : "doneNoText");
+    $("doneText").textContent = attending === "Yes"
+      ? t(updated ? "doneUpdated" : "doneYesText")
+      : (updated ? t("doneUpdated") + " " : "") + t("doneNoText");
     done.querySelector(".rings").classList.add("is-inview");
     if (!quiet) done.focus();
   }
 
   var prev = store("get", "rsvp-sent");
-  if (prev) { try { var pr = JSON.parse(prev); showDone(pr.name, pr.attending, true); } catch (e) { /* ignore */ } }
+  if (prev) { try { var pr = JSON.parse(prev); showDone(pr.name, pr.attending, true, pr.updated); } catch (e) { /* ignore */ } }
+
+  // same rules as the Google script: Bangla digits allowed, 8–15 digits
+  function phoneOk(v) {
+    var d = String(v || "").replace(/[\u09E6-\u09EF]/g, "0").replace(/\D/g, "");
+    return d.length >= 8 && d.length <= 15;
+  }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -438,16 +446,18 @@
     err.textContent = "";
     var data = new FormData(form);
     var name = (data.get("name") || "").trim().slice(0, 80);
+    var phone = (data.get("phone") || "").trim().slice(0, 20);
     var attending = data.get("attending");
 
     if (!name) { err.textContent = t("errName"); $("rsvpName").focus(); return; }
+    if (!phoneOk(phone)) { err.textContent = t("errPhone"); $("rsvpPhone").focus(); return; }
     if (!attending) { err.textContent = t("errChoice"); return; }
     if (!W.rsvpEndpoint) { err.textContent = t("notConnected"); return; }
-    if (Date.now() - lastSendAt < 15000) return; // no rapid repeat sends
+    if (Date.now() - lastSendAt < 8000) return; // no rapid repeat clicks
 
     var payload = new URLSearchParams({
       name: name,
-      phone: (data.get("phone") || "").trim().slice(0, 20),
+      phone: phone,
       attending: attending,
       message: (data.get("message") || "").trim().slice(0, 500),
       invitedAs: guest,
@@ -461,13 +471,20 @@
     btn.disabled = true;
     btn.textContent = t("sending");
 
-    // no-cors: Google accepts the data; the reply can't be read, but a network failure still throws.
-    fetch(W.rsvpEndpoint, { method: "POST", mode: "no-cors", body: payload })
-      .then(function () {
-        store("set", "rsvp-sent", JSON.stringify({ name: name, attending: attending }));
-        showDone(name, attending);
+    // Google replies with {ok, status}: saved | updated | phone | invalid | busy | full | error
+    fetch(W.rsvpEndpoint, { method: "POST", body: payload })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res && res.ok) {
+          store("set", "rsvp-sent", JSON.stringify({ name: name, attending: attending, updated: res.status === "updated" }));
+          showDone(name, attending, false, res.status === "updated");
+        } else {
+          lastSendAt = 0;
+          var why = res && res.status;
+          err.textContent = t(why === "phone" ? "errPhone" : why === "busy" ? "errBusy" : why === "invalid" ? "errChoice" : "errSave");
+        }
       })
-      .catch(function () { err.textContent = t("errNet"); })
+      .catch(function () { lastSendAt = 0; err.textContent = t("errNet"); })
       .finally(function () { btn.disabled = false; btn.textContent = t("send"); });
   });
 

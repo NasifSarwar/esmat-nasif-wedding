@@ -57,6 +57,14 @@ https://nasifsarwar.github.io/esmat-nasif-wedding/?to=Tanvir&lang=bn
 
 The **Invite link name** column in the sheet shows which link each reply came from.
 
+## How RSVPs are stored
+
+- **One row per guest**, identified by **phone number + name**. Phone is required.
+- Same phone + same name again → that row is **updated** (latest answer wins). The guest sees "We've updated your earlier RSVP".
+- Same phone + a different name → a **separate row** (family members sharing a phone).
+- Numbers are matched in any format: `01711-617527`, `+880 1711 617527` and Bangla digits all count as the same number.
+- The page shows Google's real answer: saved, updated, or an error with a clear message.
+
 ## Security
 
 What is protected:
@@ -68,7 +76,7 @@ What is protected:
   - checks every field and limits its length; anything else sent is ignored
   - neutralises spreadsheet formulas (`=HYPERLINK(...)` etc.)
   - hidden trap field + minimum fill time catch most spam bots
-  - rate limits: 30 RSVPs a minute in total, 3 per person per 10 minutes
+  - rate limits: 60 RSVPs a minute in total, 3 per person per 10 minutes
   - stops at 3,000 rows, so a flood can't fill your Drive
   - never shows error details to visitors (see them in Apps Script → Executions)
 
