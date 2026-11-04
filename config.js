@@ -26,6 +26,10 @@ window.WEDDING = {
     lat: 23.8023502,
     lng: 90.4633476,
     mapLink: "https://maps.app.goo.gl/iQbd32KJibN1igYf7",
+    // The map box searches for the venue by name, so it shows the real
+    // Google listing (name, photos, directions) instead of a bare pin.
+    // If it ever shows the wrong place, use the plus code instead: "RF27+R7F Dhaka"
+    mapQuery: "Pepper Tree BD, Satarkul, Dhaka",
   },
 
   // icon can be: guests, nikah, dining, dua

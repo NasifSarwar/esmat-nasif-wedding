@@ -195,8 +195,9 @@
   $("mapLink").href = venue.mapLink || ("https://www.google.com/maps?q=" + venue.lat + "," + venue.lng);
   var mapSet = "";
   function setMap() {
-    if (!venue.lat) { $("mapFrame").parentNode.hidden = true; return; }
-    var src = "https://maps.google.com/maps?q=" + venue.lat + "," + venue.lng + "&z=15&hl=" + lang + "&output=embed";
+    if (!venue.lat && !venue.mapQuery) { $("mapFrame").parentNode.hidden = true; return; }
+    var q = venue.mapQuery ? encodeURIComponent(venue.mapQuery) : venue.lat + "," + venue.lng;
+    var src = "https://maps.google.com/maps?q=" + q + "&z=16&hl=" + lang + "&output=embed";
     if (src !== mapSet) { $("mapFrame").src = src; mapSet = src; }
   }
 
